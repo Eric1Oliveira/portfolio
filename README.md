@@ -28,8 +28,7 @@ Ainda estou aprendendo, mas cada parte deste projeto representa **o que sei hoje
 
 ## 🌐 Acesse online
 
-**[Clique aqui para ver o portfólio ao vivo](https://eric1oliveira.github.io/portfolio/)**  
-_(substitua pelo link quando publicar)_
+**[Clique aqui para ver o portfólio ao vivo](https://eric1oliveira.github.io/portfolio/)**
 
 ## 📫 Contato
 

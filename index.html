@@ -1,2585 +1,805 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!doctype html>
+<html lang="pt-BR" data-theme="dark" data-scene="base">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eric Oliveira - Desenvolvedor Full-Stack</title>
-    <style>
-        /* Reset e configurações básicas */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #e0e0e0;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            min-height: 100vh;
-            transition: all 0.3s ease;
-        }
-
-        /* Light Theme */
-        body.light-theme {
-            color: #1a1a1a;
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
-        }
-
-        body.light-theme header {
-            background: rgba(255, 255, 255, 0.98);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        body.light-theme .logo {
-            color: #0056b3;
-            font-weight: 800;
-        }
-
-        body.light-theme .nav-links a {
-            color: #2c3e50;
-            font-weight: 500;
-        }
-
-        body.light-theme .nav-links a:hover {
-            color: #0056b3;
-        }
-
-        body.light-theme .nav-links a::after {
-            background: #0056b3;
-        }
-
-        body.light-theme .mobile-menu span {
-            background: #2c3e50;
-        }
-
-        body.light-theme .theme-toggle {
-            background: rgba(0, 86, 179, 0.1);
-            border: 1px solid rgba(0, 86, 179, 0.3);
-            color: #2c3e50;
-            font-weight: 500;
-        }
-
-        body.light-theme .theme-toggle:hover {
-            background: rgba(0, 86, 179, 0.15);
-            border-color: rgba(0, 86, 179, 0.4);
-        }
-
-        body.light-theme .hero::before {
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23000000" stroke-width="0.8" opacity="0.08"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-        }
-
-        body.light-theme .hero h1 {
-            background: linear-gradient(45deg, #0056b3, #1a1a1a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        body.light-theme .hero .subtitle {
-            color: #495057;
-            font-weight: 500;
-        }
-
-        body.light-theme .cta-button {
-            background: linear-gradient(45deg, #0056b3, #003d82);
-            color: #ffffff;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0, 86, 179, 0.3);
-        }
-
-        body.light-theme .cta-button:hover {
-            box-shadow: 0 8px 25px rgba(0, 86, 179, 0.4);
-        }
-
-        body.light-theme .section-title {
-            color: #0056b3;
-            font-weight: 700;
-        }
-
-        body.light-theme .section-title::after {
-            background: linear-gradient(45deg, #0056b3, #003d82);
-        }
-
-        body.light-theme .about-text {
-            color: #2c3e50;
-            background: #ffffff;
-            border: 1px solid rgba(0, 86, 179, 0.15);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        body.light-theme .skill-card {
-            background: #ffffff;
-            border: 1px solid rgba(0, 86, 179, 0.15);
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        body.light-theme .skill-card:hover {
-            box-shadow: 0 8px 30px rgba(0, 86, 179, 0.2);
-            border-color: rgba(0, 86, 179, 0.25);
-        }
-
-        body.light-theme .skill-icon {
-            color: #0056b3;
-        }
-
-        body.light-theme .skill-name {
-            color: #2c3e50;
-            font-weight: 600;
-        }
-
-        body.light-theme .project-card {
-            background: #ffffff;
-            border: 1px solid rgba(0, 86, 179, 0.15);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        body.light-theme .project-card:hover {
-            box-shadow: 0 12px 40px rgba(0, 86, 179, 0.15);
-            border-color: rgba(0, 86, 179, 0.25);
-        }
-
-        body.light-theme .project-image {
-            background: linear-gradient(45deg, #0056b3, #003d82);
-            color: #ffffff;
-        }
-
-        body.light-theme .project-title {
-            color: #0056b3;
-            font-weight: 600;
-        }
-
-        body.light-theme .project-description {
-            color: #495057;
-            font-weight: 400;
-        }
-
-        body.light-theme .tech-tag {
-            background: rgba(0, 86, 179, 0.15);
-            color: #0056b3;
-            font-weight: 500;
-        }
-
-        body.light-theme .project-link {
-            border-color: #0056b3;
-            color: #0056b3;
-            font-weight: 500;
-        }
-
-        body.light-theme .project-link:hover {
-            background: #0056b3;
-            color: #ffffff;
-        }
-
-        body.light-theme .contact-content p {
-            color: #495057 !important;
-            font-weight: 500;
-        }
-
-        body.light-theme .contact-link {
-            background: #ffffff;
-            color: #2c3e50;
-            border: 1px solid rgba(0, 86, 179, 0.2);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            font-weight: 500;
-        }
-
-        body.light-theme .contact-link:hover {
-            background: #0056b3;
-            color: #ffffff;
-            border-color: #0056b3;
-        }
-
-        body.light-theme footer {
-            background: rgba(255, 255, 255, 0.98);
-            border-top: 1px solid rgba(0, 86, 179, 0.15);
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
-            color: #495057;
-        }
-
-        body.light-theme .back-to-top {
-            background: linear-gradient(45deg, #0056b3, #003d82);
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(0, 86, 179, 0.3);
-        }
-
-        body.light-theme .back-to-top:hover {
-            box-shadow: 0 8px 25px rgba(0, 86, 179, 0.4);
-        }
-
-        /* Container principal */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background: rgba(15, 15, 35, 0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #64ffda;
-        }
-
-        /* Theme Toggle */
-        .theme-toggle {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            padding: 8px 16px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #e0e0e0;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .theme-icon {
-            font-size: 1.2rem;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: #e0e0e0;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: #64ffda;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #64ffda;
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Menu mobile */
-        .mobile-menu {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .mobile-menu span {
-            width: 25px;
-            height: 3px;
-            background: #e0e0e0;
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #64ffda, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero .subtitle {
-            font-size: 1.5rem;
-            color: #b0b0b0;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.2s both;
-            min-height: 2rem;
-        }
-
-        /* Typing Animation */
-        .typing-text {
-            border-right: 3px solid #64ffda;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { border-color: #64ffda; }
-            51%, 100% { border-color: transparent; }
-        }
-
-        .typing-container {
-            display: inline-block;
-            min-height: 1.5em;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(45deg, #64ffda, #4fc3f7);
-            color: #0f0f23;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: fadeInUp 1s ease 0.4s both;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.3);
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .download-cv {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 12px 30px;
-            background: transparent;
-            border: 2px solid #64ffda;
-            color: #64ffda;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease 0.6s both;
-        }
-
-        .download-cv:hover {
-            background: #64ffda;
-            color: #0f0f23;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.3);
-        }
-
-        body.light-theme .download-cv {
-            border-color: #0056b3;
-            color: #0056b3;
-        }
-
-        body.light-theme .download-cv:hover {
-            background: #0056b3;
-            color: #ffffff;
-        }
-
-        /* Seções */
-        section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #64ffda;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(45deg, #64ffda, #4fc3f7);
-        }
-
-        /* Sobre */
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-text {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #b0b0b0;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Habilidades */
-        .skills-category {
-            margin-bottom: 4rem;
-        }
-
-        .category-title {
-            font-size: 1.8rem;
-            color: #64ffda;
-            margin-bottom: 2rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        body.light-theme .category-title {
-            color: #0056b3;
-            font-weight: 800;
-        }
-
-        .skills-progress-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .skill-progress-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-progress-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #64ffda, #4fc3f7, #9c27b0);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .skill-progress-card:hover::before {
-            opacity: 1;
-        }
-
-        .skill-progress-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(100, 255, 218, 0.15);
-            border-color: rgba(100, 255, 218, 0.3);
-        }
-
-        body.light-theme .skill-progress-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-color: rgba(0, 86, 179, 0.15);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        body.light-theme .skill-progress-card:hover {
-            box-shadow: 0 25px 50px rgba(0, 86, 179, 0.2);
-            border-color: rgba(0, 86, 179, 0.3);
-        }
-
-        .skill-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .skill-icon {
-            font-size: 2.5rem;
-            color: #64ffda;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        body.light-theme .skill-icon {
-            color: #0056b3;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .skill-info {
-            flex: 1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .skill-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin: 0;
-        }
-
-        body.light-theme .skill-name {
-            color: #1a1a1a;
-        }
-
-        .skill-level {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #64ffda;
-            background: rgba(100, 255, 218, 0.1);
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            border: 1px solid rgba(100, 255, 218, 0.3);
-        }
-
-        body.light-theme .skill-level {
-            color: #0056b3;
-            background: rgba(0, 86, 179, 0.1);
-            border-color: rgba(0, 86, 179, 0.3);
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-
-        body.light-theme .progress-bar {
-            background: rgba(0, 86, 179, 0.1);
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #64ffda, #4fc3f7);
-            border-radius: 10px;
-            width: 0%;
-            transition: width 2s ease-in-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        body.light-theme .progress-fill {
-            background: linear-gradient(90deg, #0056b3, #007bff);
-        }
-
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .skill-description {
-            font-size: 0.95rem;
-            color: #b0b0b0;
-            line-height: 1.5;
-            margin: 0;
-            font-weight: 400;
-        }
-
-        body.light-theme .skill-description {
-            color: #495057;
-        }
-
-        /* Projetos - Novo Design */
-        .projects-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .projects-filter {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 0.8rem 1.5rem;
-            background: transparent;
-            border: 2px solid rgba(100, 255, 218, 0.3);
-            color: #64ffda;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: #64ffda;
-            color: #0f0f23;
-            border-color: #64ffda;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
-        }
-
-        body.light-theme .filter-btn {
-            border-color: rgba(0, 86, 179, 0.3);
-            color: #0056b3;
-        }
-
-        body.light-theme .filter-btn:hover,
-        body.light-theme .filter-btn.active {
-            background: #0056b3;
-            color: #ffffff;
-            border-color: #0056b3;
-        }
-
-        .projects-timeline {
-            position: relative;
-            padding: 2rem 0;
-        }
-
-        .timeline-line {
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(to bottom, #64ffda, rgba(100, 255, 218, 0.3));
-            transform: translateX(-50%);
-        }
-
-        body.light-theme .timeline-line {
-            background: linear-gradient(to bottom, #0056b3, rgba(0, 86, 179, 0.3));
-        }
-
-        .project-timeline-item {
-            display: flex;
-            margin-bottom: 4rem;
-            position: relative;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.6s ease;
-        }
-
-        .project-timeline-item.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .project-timeline-item:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-
-        .project-timeline-item:nth-child(even) .project-card-new {
-            margin-left: 0;
-            margin-right: 3rem;
-        }
-
-        .project-timeline-item:nth-child(odd) .project-card-new {
-            margin-right: 0;
-            margin-left: 3rem;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            top: 2rem;
-            width: 20px;
-            height: 20px;
-            background: #64ffda;
-            border: 4px solid #0f0f23;
-            border-radius: 50%;
-            transform: translateX(-50%);
-            z-index: 2;
-            box-shadow: 0 0 20px rgba(100, 255, 218, 0.5);
-        }
-
-        body.light-theme .timeline-dot {
-            background: #0056b3;
-            border-color: #ffffff;
-            box-shadow: 0 0 20px rgba(0, 86, 179, 0.5);
-        }
-
-        .project-card-new {
-            flex: 1;
-            max-width: 500px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            position: relative;
-        }
-
-        .project-card-new::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #64ffda, #4fc3f7, #9c27b0);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .project-card-new:hover::before {
-            opacity: 1;
-        }
-
-        .project-card-new:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(100, 255, 218, 0.15);
-            border-color: rgba(100, 255, 218, 0.3);
-        }
-
-        body.light-theme .project-card-new {
-            background: rgba(255, 255, 255, 0.9);
-            border-color: rgba(0, 86, 179, 0.15);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        body.light-theme .project-card-new:hover {
-            box-shadow: 0 25px 50px rgba(0, 86, 179, 0.2);
-            border-color: rgba(0, 86, 179, 0.3);
-        }
-
-        .project-header {
-            padding: 2rem 2rem 1rem;
-            position: relative;
-        }
-
-        .project-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #64ffda, #4fc3f7);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 8px 20px rgba(100, 255, 218, 0.3);
-        }
-
-        body.light-theme .project-icon {
-            background: linear-gradient(135deg, #0056b3, #007bff);
-            box-shadow: 0 8px 20px rgba(0, 86, 179, 0.3);
-        }
-
-        .project-title-new {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 0.5rem;
-        }
-
-        body.light-theme .project-title-new {
-            color: #1a1a1a;
-        }
-
-        .project-status-new {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .status-completed-new {
-            background: linear-gradient(135deg, #4caf50, #66bb6a);
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-        }
-
-        .status-development-new {
-            background: linear-gradient(135deg, #ff9800, #ffb74d);
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
-        }
-
-        .project-body {
-            padding: 0 2rem 2rem;
-        }
-
-        .project-description-new {
-            color: #b0b0b0;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-        }
-
-        body.light-theme .project-description-new {
-            color: #495057;
-        }
-
-        .project-tech-new {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin-bottom: 2rem;
-        }
-
-        .tech-tag-new {
-            background: rgba(100, 255, 218, 0.15);
-            color: #64ffda;
-            padding: 0.4rem 0.9rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            border: 1px solid rgba(100, 255, 218, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .tech-tag-new:hover {
-            background: rgba(100, 255, 218, 0.25);
-            transform: translateY(-2px);
-        }
-
-        body.light-theme .tech-tag-new {
-            background: rgba(0, 86, 179, 0.1);
-            color: #0056b3;
-            border-color: rgba(0, 86, 179, 0.2);
-        }
-
-        body.light-theme .tech-tag-new:hover {
-            background: rgba(0, 86, 179, 0.2);
-        }
-
-        .project-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .project-date-new {
-            font-size: 0.85rem;
-            color: #64ffda;
-            font-weight: 600;
-        }
-
-        body.light-theme .project-date-new {
-            color: #0056b3;
-        }
-
-        .project-links-new {
-            display: flex;
-            gap: 0.8rem;
-        }
-
-        .project-link-new {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.6rem 1.2rem;
-            background: transparent;
-            border: 1.5px solid #64ffda;
-            color: #64ffda;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .project-link-new:hover {
-            background: #64ffda;
-            color: #0f0f23;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
-        }
-
-        body.light-theme .project-link-new {
-            border-color: #0056b3;
-            color: #0056b3;
-        }
-
-        body.light-theme .project-link-new:hover {
-            background: #0056b3;
-            color: #ffffff;
-        }
-
-        /* Contato */
-        .contact-content {
-            text-align: center;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        /* Contact Cards Grid */
-        .contact-links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-
-        .contact-card {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            text-decoration: none;
-            color: #e0e0e0;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .contact-card:hover::before {
-            left: 100%;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(100, 255, 218, 0.15);
-            border-color: rgba(100, 255, 218, 0.3);
-        }
-
-        body.light-theme .contact-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-color: rgba(0, 86, 179, 0.15);
-            color: #1a1a1a;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        body.light-theme .contact-card:hover {
-            box-shadow: 0 20px 40px rgba(0, 86, 179, 0.2);
-            border-color: rgba(0, 86, 179, 0.3);
-        }
-
-        .contact-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            transition: all 0.4s ease;
-            animation: iconFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes iconFloat {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-5px) rotate(5deg); }
-        }
-
-        .email-card .contact-icon {
-            background: linear-gradient(135deg, #ea4335, #fbbc05);
-            box-shadow: 0 8px 20px rgba(234, 67, 53, 0.3);
-        }
-
-        .linkedin-card .contact-icon {
-            background: linear-gradient(135deg, #0077b5, #00a0dc);
-            box-shadow: 0 8px 20px rgba(0, 119, 181, 0.3);
-        }
-
-        .github-card .contact-icon {
-            background: linear-gradient(135deg, #333, #666);
-            box-shadow: 0 8px 20px rgba(51, 51, 51, 0.3);
-        }
-
-        body.light-theme .github-card .contact-icon {
-            background: linear-gradient(135deg, #24292e, #586069);
-        }
-
-        .contact-card:hover .contact-icon {
-            transform: scale(1.1) rotate(10deg);
-            animation-play-state: paused;
-        }
-
-        .contact-info {
-            flex: 1;
-            text-align: left;
-        }
-
-        .contact-info h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-        }
-
-        body.light-theme .contact-info h3 {
-            color: #1a1a1a;
-        }
-
-        .contact-info p {
-            font-size: 0.95rem;
-            color: #b0b0b0;
-            margin: 0;
-        }
-
-        body.light-theme .contact-info p {
-            color: #495057;
-        }
-
-        .contact-arrow {
-            font-size: 1.5rem;
-            color: #64ffda;
-            transition: all 0.3s ease;
-            font-weight: bold;
-        }
-
-        body.light-theme .contact-arrow {
-            color: #0056b3;
-        }
-
-        .contact-card:hover .contact-arrow {
-            transform: translateX(5px);
-            color: #ffffff;
-        }
-
-        body.light-theme .contact-card:hover .contact-arrow {
-            color: #0056b3;
-        }
-
-        /* Contact Form - Ultra Modern Design */
-        .contact-form-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 30px;
-            padding: 4rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        .contact-form-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #64ffda, #4fc3f7, #9c27b0, #e91e63, #ff9800, #64ffda);
-            background-size: 300% 100%;
-            animation: gradientShift 4s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .contact-form-container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(100, 255, 218, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(79, 195, 247, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(156, 39, 176, 0.03) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        body.light-theme .contact-form-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-color: rgba(0, 86, 179, 0.12);
-            box-shadow: 
-                0 25px 50px rgba(0, 86, 179, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.8);
-        }
-
-        body.light-theme .contact-form-container::before {
-            background: linear-gradient(90deg, #0056b3, #007bff, #6f42c1, #dc3545, #fd7e14, #0056b3);
-            background-size: 300% 100%;
-        }
-
-        body.light-theme .contact-form-container::after {
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(0, 86, 179, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 123, 255, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(111, 66, 193, 0.05) 0%, transparent 50%);
-        }
-
-        .form-title {
-            font-size: 2.2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #64ffda, #4fc3f7, #9c27b0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 3rem;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .form-title::after {
-            content: '✨';
-            position: absolute;
-            right: -40px;
-            top: -10px;
-            font-size: 1.5rem;
-            animation: sparkle 2s ease-in-out infinite;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
-            50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
-        }
-
-        body.light-theme .form-title {
-            background: linear-gradient(135deg, #0056b3, #007bff, #6f42c1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .form-group {
-            position: relative;
-        }
-
-        .form-group label {
-            position: absolute;
-            top: 1rem;
-            left: 1.2rem;
-            font-size: 1rem;
-            font-weight: 600;
-            color: rgba(100, 255, 218, 0.7);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        body.light-theme .form-group label {
-            color: rgba(0, 86, 179, 0.7);
-        }
-
-        .form-group.focused label,
-        .form-group input:focus + label,
-        .form-group textarea:focus + label {
-            top: -0.5rem;
-            left: 1rem;
-            font-size: 0.85rem;
-            color: #64ffda;
-            background: rgba(15, 15, 35, 0.9);
-            padding: 0.2rem 0.6rem;
-            border-radius: 8px;
-            font-weight: 700;
-        }
-
-        body.light-theme .form-group.focused label,
-        body.light-theme .form-group input:focus + label,
-        body.light-theme .form-group textarea:focus + label {
-            color: #0056b3;
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 8px rgba(0, 86, 179, 0.2);
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1.3rem 1.2rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            color: #ffffff;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            backdrop-filter: blur(10px);
-        }
-
-        body.light-theme .form-group input,
-        body.light-theme .form-group textarea {
-            background: rgba(255, 255, 255, 0.7);
-            border-color: rgba(0, 86, 179, 0.15);
-            color: #1a1a1a;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #64ffda;
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 
-                0 0 0 4px rgba(100, 255, 218, 0.1),
-                0 8px 32px rgba(100, 255, 218, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px) scale(1.02);
-        }
-
-        body.light-theme .form-group input:focus,
-        body.light-theme .form-group textarea:focus {
-            border-color: #0056b3;
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 
-                0 0 0 4px rgba(0, 86, 179, 0.1),
-                0 8px 32px rgba(0, 86, 179, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.8);
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: transparent;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 140px;
-            font-family: inherit;
-        }
-
-        /* Floating particles effect */
-        .form-group::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: 1rem;
-            width: 6px;
-            height: 6px;
-            background: #64ffda;
-            border-radius: 50%;
-            opacity: 0;
-            transform: translateY(-50%);
-            transition: all 0.3s ease;
-        }
-
-        body.light-theme .form-group::before {
-            background: #0056b3;
-        }
-
-        .form-group input:focus ~ ::before,
-        .form-group textarea:focus ~ ::before {
-            opacity: 1;
-            animation: particle 2s ease-in-out infinite;
-        }
-
-        @keyframes particle {
-            0%, 100% { transform: translateY(-50%) scale(1); }
-            50% { transform: translateY(-70%) scale(1.5); }
-        }
-
-        /* Success/Error states */
-        .form-group.success input,
-        .form-group.success textarea {
-            border-color: #4caf50;
-            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
-        }
-
-        .form-group.error input,
-        .form-group.error textarea {
-            border-color: #f44336;
-            box-shadow: 0 0 0 4px rgba(244, 67, 54, 0.1);
-            animation: shake 0.5s ease-in-out;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-
-        /* Submit Button - Minimal Design */
-        .submit-btn {
-            background: linear-gradient(135deg, #64ffda 0%, #4fc3f7 100%);
-            color: #0f0f23;
-            border: none;
-            padding: 1.2rem 2.5rem;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            transition: all 0.3s ease;
-            margin-top: 2rem;
-            width: 100%;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-            box-shadow: 0 4px 15px rgba(100, 255, 218, 0.2);
-        }
-
-        body.light-theme .submit-btn {
-            background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(0, 86, 179, 0.2);
-        }
-
-        .btn-text,
-        .btn-icon {
-            transition: all 0.3s ease;
-        }
-
-        .btn-icon {
-            font-size: 1.2rem;
-        }
-
-        /* Simple Hover Effect */
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(100, 255, 218, 0.3);
-            background: linear-gradient(135deg, #4fc3f7 0%, #64ffda 100%);
-        }
-
-        body.light-theme .submit-btn:hover {
-            box-shadow: 0 8px 25px rgba(0, 86, 179, 0.3);
-            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-        }
-
-        /* Active state for button press */
-        .submit-btn:active {
-            transform: translateY(0px);
-            box-shadow: 0 2px 10px rgba(100, 255, 218, 0.3);
-        }
-
-        body.light-theme .submit-btn:active {
-            box-shadow: 0 2px 10px rgba(0, 86, 179, 0.3);
-        }
-
-
-
-        /* Loading state */
-        .submit-btn.loading {
-            pointer-events: none;
-            background: linear-gradient(135deg, #666 0%, #888 50%, #666 100%);
-            color: #ccc;
-        }
-
-        .submit-btn.loading .btn-icon {
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Success state */
-        .submit-btn.success {
-            background: linear-gradient(135deg, #4caf50 0%, #66bb6a 50%, #81c784 100%);
-            color: #ffffff;
-            animation: successPulse 0.6s ease-out;
-        }
-
-        @keyframes successPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(15, 15, 35, 0.95);
-            text-align: center;
-            padding: 2rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Botão voltar ao topo */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(45deg, #64ffda, #4fc3f7);
-            color: #0f0f23;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.5rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.3);
-        }
-
-        /* Animações */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 70px; /* ajuste conforme altura do header */
-                left: 0;
-                width: 100%;
-                background: rgba(15, 15, 35, 0.98);
-                box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-                z-index: 999;
-                padding: 1rem 0;
-                gap: 0;
-            }
-            .nav-links.open {
-                display: flex;
-                animation: dropdownMenu 0.3s ease;
-            }
-            .nav-links li {
-                width: 100%;
-                text-align: center;
-                margin: 0;
-                padding: 0.7rem 0;
-            }
-            .nav-links a {
-                width: 100%;
-                display: block;
-                padding: 0.7rem 0;
-            }
-
-        @keyframes dropdownMenu {
-            from { opacity: 0; transform: translateY(-20px);}
-            to   { opacity: 1; transform: translateY(0);}
-        }
-
-            .mobile-menu {
-                display: flex;
-            }
-
-            .theme-toggle {
-                padding: 6px 12px;
-                font-size: 0.8rem;
-            }
-
-            .theme-text {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.2rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 0.8rem;
-            }
-
-            .cta-button, .download-cv {
-                width: 100%;
-                max-width: 280px;
-                text-align: center;
-                justify-content: center;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .skills-progress-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .skill-progress-card {
-                padding: 1.5rem;
-            }
-
-            .skill-header {
-                gap: 0.8rem;
-                margin-bottom: 1rem;
-            }
-
-            .skill-icon {
-                font-size: 2rem;
-            }
-
-            .skill-name {
-                font-size: 1.2rem;
-            }
-
-            .skill-level {
-                font-size: 0.9rem;
-                padding: 0.2rem 0.6rem;
-            }
-
-            .projects-filter {
-                gap: 0.5rem;
-            }
-
-            .filter-btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.8rem;
-            }
-
-            .projects-timeline {
-                padding: 1rem 0;
-            }
-
-            .timeline-line {
-                left: 2rem;
-            }
-
-            .project-timeline-item {
-                flex-direction: column !important;
-                margin-bottom: 3rem;
-            }
-
-            .project-timeline-item:nth-child(even) .project-card-new,
-            .project-timeline-item:nth-child(odd) .project-card-new {
-                margin: 0 0 0 4rem;
-                max-width: none;
-            }
-
-            .timeline-dot {
-                left: 2rem;
-                width: 16px;
-                height: 16px;
-                border-width: 3px;
-            }
-
-            .project-header {
-                padding: 1.5rem 1.5rem 1rem;
-            }
-
-            .project-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-            }
-
-            .project-title-new {
-                font-size: 1.2rem;
-            }
-
-            .project-body {
-                padding: 0 1.5rem 1.5rem;
-            }
-
-            .project-footer {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: flex-start;
-            }
-
-            .project-links-new {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .contact-links-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-                margin-bottom: 3rem;
-            }
-
-            .contact-card {
-                padding: 1.5rem;
-                gap: 1rem;
-            }
-
-            .contact-icon {
-                width: 50px;
-                height: 50px;
-            }
-
-            .contact-info h3 {
-                font-size: 1.1rem;
-            }
-
-            .contact-info p {
-                font-size: 0.9rem;
-            }
-
-            .contact-form-container {
-                padding: 2rem;
-                margin: 0 1rem;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .form-title {
-                font-size: 1.5rem;
-            }
-
-            .submit-btn {
-                padding: 1rem 2rem;
-                font-size: 1rem;
-            }
-
-            .back-to-top {
-                bottom: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .about-text {
-                padding: 1.5rem;
-            }
-
-            .skill-progress-card {
-                padding: 1.2rem;
-            }
-
-            .project-content {
-                padding: 1rem;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Eric Oliveira — Dev full-stack e fundador da DumTech</title>
+  <meta name="description" content="Eric Oliveira, desenvolvedor full-stack e fundador da DumTech. Sistemas de gestão, delivery com impressão automática, SaaS para restaurantes e automações — do banco de dados ao balcão.">
+  <meta name="author" content="Eric Oliveira">
+  <meta name="theme-color" content="#0b1416">
+  <link rel="canonical" href="https://eric1oliveira.github.io/portfolio/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://eric1oliveira.github.io/portfolio/">
+  <meta property="og:title" content="Eric Oliveira — Dev full-stack e fundador da DumTech">
+  <meta property="og:description" content="Construo software que põe negócios para rodar: do balcão ao banco de dados, até a nota que sai impressa na cozinha.">
+  <meta property="og:image" content="https://eric1oliveira.github.io/portfolio/assets/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+      } catch (e) {}
+      // Se o main.js não rodar, nada fica escondido esperando animação.
+      setTimeout(function () { if (!window.__eo) d.classList.remove('js'); }, 4000);
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Fragment+Mono&family=Instrument+Sans:wght@400..700&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lenis@1.3.4/dist/lenis.min.js" defer></script>
+  <script src="main.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Eric Oliveira",
+    "jobTitle": "Desenvolvedor full-stack",
+    "url": "https://eric1oliveira.github.io/portfolio/",
+    "email": "mailto:ericdudu1999@gmail.com",
+    "worksFor": { "@type": "Organization", "name": "DumTech" },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Anhanguera" },
+    "address": { "@type": "PostalAddress", "addressLocality": "São Paulo", "addressCountry": "BR" },
+    "sameAs": [
+      "https://www.linkedin.com/in/eric-oliveira-9703671b5/",
+      "https://github.com/Eric1Oliveira"
+    ]
+  }
+  </script>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav class="container">
-            <div class="logo">Eric Oliveira</div>
-            <ul class="nav-links">
-                <li><a href="#home">Início</a></li>
-                <li><a href="#about">Sobre</a></li>
-                <li><a href="#skills">Habilidades</a></li>
-                <li><a href="#projects">Projetos</a></li>
-                <li><a href="#contact">Contato</a></li>
-            </ul>
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                <button class="theme-toggle" id="themeToggle">
-                    <span class="theme-icon">🌙</span>
-                    <span class="theme-text">Escuro</span>
-                </button>
-                <div class="mobile-menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </nav>
-    </header>
+  <a class="skip" href="#projetos">Pular para os projetos</a>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor__label">Abrir</span></div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Eric Oliveira</h1>
-            <p class="subtitle">
-                <span class="typing-container">
-                    <span id="typingText" class="typing-text"></span>
+  <!-- Barra do topo -->
+  <header class="topbar">
+    <a class="brand" href="#inicio">Eric Oliveira</a>
+    <nav class="topnav" aria-label="Principal">
+      <a href="#projetos">Projetos</a>
+      <a href="#trajetoria">Trajetória</a>
+      <a href="#ficha">Ficha técnica</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div class="topbar__actions">
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Mudar para o tema claro">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 3.75a8.25 8.25 0 0 1 0 16.5z" fill="currentColor"/></svg>
+      </button>
+      <a class="btn btn--ghost btn--sm topbar__cv" href="CVEricOliveira.pdf" download="Eric_Oliveira_CV.pdf">Baixar CV</a>
+      <button class="btn btn--ghost btn--sm menu-btn" type="button" data-menu aria-expanded="false" aria-controls="menu">Menu</button>
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- Abertura -->
+    <section class="hero" id="inicio" data-label="Início" tabindex="-1">
+      <div class="hero__spot" aria-hidden="true"></div>
+
+      <div class="hero__meta">
+        <p class="mono" data-intro style="--d: 650">Dev full-stack · Fundador da DumTech</p>
+        <p class="mono" data-intro style="--d: 750">São Paulo, Brasil</p>
+      </div>
+
+      <h1 class="hero__name">
+        <span class="sr-only">Eric Oliveira</span>
+        <span class="name-line" aria-hidden="true" data-letters>Eric</span>
+        <span class="name-line name-line--2" aria-hidden="true" data-letters>Oliveira</span>
+      </h1>
+
+      <div class="hero__foot">
+        <p class="hero__lede" data-intro style="--d: 900">Construo software que põe negócios para rodar: do balcão ao banco de dados, até a nota que sai impressa na cozinha.</p>
+        <div class="hero__cta" data-intro style="--d: 1050">
+          <a class="btn btn--accent" href="#contato" data-subject="Quero um sistema" data-magnetic>Pedir um projeto</a>
+          <a class="btn btn--ghost" href="CVEricOliveira.pdf" download="Eric_Oliveira_CV.pdf" data-magnetic>
+            Baixar currículo
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 4v12m0 0-5-5m5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre / manifesto -->
+    <section class="about" id="sobre" data-label="Sobre" data-scene="inverse" tabindex="-1">
+      <div class="about__pin">
+        <p class="eyebrow">Sobre</p>
+        <p class="manifesto" data-scrub>Comecei auditando notas fiscais. Depois desenhei móveis sob medida e tomei conta de uma marcenaria com seis pessoas. Hoje cuido de sistemas corporativos e construo os meus na DumTech. <em>Mudou a ferramenta, não o ofício:</em> medir antes de cortar, construir para durar, entregar funcionando.</p>
+      </div>
+    </section>
+
+    <!-- Projetos em destaque (rolo horizontal no desktop) -->
+    <section class="reel" id="projetos" data-label="Projetos" tabindex="-1">
+      <div class="reel__pin">
+        <p class="reel__count mono" aria-hidden="true"><span data-reel-count>01</span> / 05</p>
+        <div class="reel__track">
+
+          <header class="reel__intro">
+            <p class="eyebrow" data-reveal>Projetos em destaque</p>
+            <h2 class="title" data-reveal="mask">Feito para ser usado.</h2>
+            <p class="reel__text" data-reveal>Produtos da DumTech, um sistema de cliente em produção, uma automação que trocou conferência manual por cinco minutos e a central onde eu trabalho.</p>
+            <p class="reel__hint mono" aria-hidden="true">Role para avançar <span>→</span></p>
+          </header>
+
+          <!-- DumTech Hub -->
+          <article class="shot" aria-labelledby="shot-hub">
+            <button class="shot__media" type="button" data-open="hub" data-cursor="view" aria-label="Abrir o projeto DumTech Hub">
+              <span class="shot__frame">
+                <img src="assets/hub-inicio-1600.webp" srcset="assets/hub-inicio-900.webp 900w, assets/hub-inicio-1600.webp 1600w" sizes="(min-width: 900px) 70vw, 100vw" width="1600" height="1000" loading="lazy" decoding="async" alt="">
+              </span>
+            </button>
+            <div class="shot__body">
+              <div>
+                <p class="shot__tag mono">Produto DumTech · 2026</p>
+                <h3 class="shot__title" id="shot-hub">DumTech Hub</h3>
+              </div>
+              <div>
+                <p class="shot__desc">Sete sistemas de gestão num só aplicativo para Windows: estoque, balcão, financeiro, orçamentos, ordens de serviço, agenda e clientes.</p>
+                <ul class="shot__facts">
+                  <li>7 módulos</li><li>+500 testes</li><li>Funciona offline</li>
+                </ul>
+                <button class="more" type="button" data-open="hub">Ver o projeto <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Delivery da pizzaria (cliente) -->
+          <article class="shot" aria-labelledby="shot-delivery">
+            <button class="shot__media" type="button" data-open="delivery" data-cursor="view" aria-label="Abrir o projeto Delivery de pizzaria">
+              <span class="shot__frame">
+                <span class="art art--delivery" aria-hidden="true">
+                  <span class="receipt-wrap">
+                    <span class="receipt">
+                      <span class="receipt__head">PEDIDO #1287<br>ENTREGA · 19:42</span>
+                      <span class="receipt__rule"></span>
+                      <span class="receipt__row"><span>1x PIZZA MARGHERITA G</span><span>64,90</span></span>
+                      <span class="receipt__row receipt__row--sub"><span>+ borda catupiry</span><span>8,00</span></span>
+                      <span class="receipt__row"><span>1x PIZZA CALABRESA M</span><span>49,90</span></span>
+                      <span class="receipt__row"><span>1x REFRIGERANTE 2L</span><span>14,00</span></span>
+                      <span class="receipt__rule"></span>
+                      <span class="receipt__row"><span>FRETE · 3,2 KM</span><span>9,00</span></span>
+                      <span class="receipt__row receipt__total"><span>TOTAL</span><span>R$ 145,80</span></span>
+                      <span class="receipt__rule"></span>
+                      <span class="receipt__paid">PAGO · PIX</span>
+                    </span>
+                  </span>
+                  <span class="flow">
+                    <span class="flow__item"><b>19:42</b>Pagamento confirmado</span>
+                    <span class="flow__item"><b>19:42</b>Nota impressa na cozinha</span>
+                    <span class="flow__item"><b>19:51</b>Cliente avisado: no forno</span>
+                    <span class="flow__item is-now"><b>20:13</b>Saiu para entrega</span>
+                  </span>
                 </span>
-            </p>
-            <div class="hero-buttons">
-                <a href="#about" class="cta-button">Conheça meu trabalho</a>
-                <a href="#" class="download-cv" id="downloadCV">
-                    📄 Baixar Currículo
-                </a>
+              </span>
+            </button>
+            <div class="shot__body">
+              <div>
+                <p class="shot__tag mono">Cliente · em produção</p>
+                <h3 class="shot__title" id="shot-delivery">Delivery de pizzaria</h3>
+              </div>
+              <div>
+                <p class="shot__desc">Loja online, painel do restaurante e impressão automática na cozinha. O pedido chega pago, sai impresso e o cliente acompanha cada etapa pelo celular.</p>
+                <ul class="shot__facts">
+                  <li>Pix integrado</li><li>Impressão automática</li><li>Avisos no celular</li>
+                </ul>
+                <button class="more" type="button" data-open="delivery">Ver o projeto <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
             </div>
+          </article>
+
+          <!-- CMV Pro -->
+          <article class="shot" aria-labelledby="shot-cmv">
+            <button class="shot__media" type="button" data-open="cmv" data-cursor="view" aria-label="Abrir o projeto CMV Pro">
+              <span class="shot__frame">
+                <span class="art art--cmv" aria-hidden="true">
+                  <span class="sheet">
+                    <span class="sheet__top"><b>CMV Pro</b><span>Fichas técnicas › Pizza Margherita G</span></span>
+                    <span class="sheet__grid">
+                      <span class="sheet__table">
+                        <span class="sheet__row sheet__row--head"><span>Ingrediente</span><span>Qtd.</span><span>Custo</span></span>
+                        <span class="sheet__row"><span>Massa</span><span>420 g</span><span>2,10</span></span>
+                        <span class="sheet__row"><span>Molho de tomate</span><span>120 g</span><span>1,18</span></span>
+                        <span class="sheet__row"><span>Muçarela</span><span>300 g</span><span>8,40</span></span>
+                        <span class="sheet__row"><span>Tomate</span><span>80 g</span><span>0,72</span></span>
+                        <span class="sheet__row"><span>Manjericão</span><span>5 g</span><span>0,45</span></span>
+                        <span class="sheet__row"><span>Azeite</span><span>10 ml</span><span>0,38</span></span>
+                        <span class="sheet__row"><span>Embalagem</span><span>1 un</span><span>1,59</span></span>
+                        <span class="sheet__row sheet__row--total"><span>Custo total</span><span></span><span>R$ 14,82</span></span>
+                      </span>
+                      <span class="sheet__side">
+                        <span class="sheet__label">CMV do prato</span>
+                        <span class="sheet__big">22,8%</span>
+                        <span class="meter"><span class="meter__fill"></span><span class="meter__goal"></span></span>
+                        <span class="sheet__note">Meta de 30% · dentro</span>
+                        <span class="sheet__kv"><span>Preço de venda</span><b>R$ 64,90</b></span>
+                        <span class="sheet__kv"><span>Margem</span><b>R$ 50,08</b></span>
+                        <span class="sheet__kv"><span>Preço p/ CMV 28%</span><b>R$ 52,93</b></span>
+                      </span>
+                    </span>
+                  </span>
+                </span>
+              </span>
+            </button>
+            <div class="shot__body">
+              <div>
+                <p class="shot__tag mono">Produto DumTech · SaaS</p>
+                <h3 class="shot__title" id="shot-cmv">CMV Pro</h3>
+              </div>
+              <div>
+                <p class="shot__desc">Custo de cardápio para restaurantes: ficha técnica, CMV, precificação, estoque, compras e financeiro no mesmo lugar.</p>
+                <ul class="shot__facts">
+                  <li>17 telas</li><li>Sem framework</li><li>Instala como app</li>
+                </ul>
+                <button class="more" type="button" data-open="cmv">Ver o projeto <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- DUM OS -->
+          <article class="shot" aria-labelledby="shot-dumos">
+            <button class="shot__media" type="button" data-open="dumos" data-cursor="view" aria-label="Abrir o projeto DUM OS">
+              <span class="shot__frame">
+                <img src="assets/dumos-mundo-1440.webp" srcset="assets/dumos-mundo-900.webp 900w, assets/dumos-mundo-1440.webp 1440w" sizes="(min-width: 900px) 70vw, 100vw" width="1440" height="900" loading="lazy" decoding="async" alt="">
+              </span>
+            </button>
+            <div class="shot__body">
+              <div>
+                <p class="shot__tag mono">Ferramenta pessoal · IA</p>
+                <h3 class="shot__title" id="shot-dumos">DUM OS</h3>
+              </div>
+              <div>
+                <p class="shot__desc">Minha central de trabalho: cada empresa é uma ilha 3D, cada projeto uma construção — e o Claude executa as tarefas da fila enquanto eu acompanho.</p>
+                <ul class="shot__facts">
+                  <li>Mundo 3D</li><li>Fila de tarefas com IA</li><li>PySide6 + three.js</li>
+                </ul>
+                <button class="more" type="button" data-open="dumos">Ver o projeto <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- AuditSync -->
+          <article class="shot" aria-labelledby="shot-audit">
+            <button class="shot__media" type="button" data-open="auditsync" data-cursor="view" aria-label="Abrir o projeto AuditSync">
+              <span class="shot__frame">
+                <span class="art art--audit" aria-hidden="true">
+                  <span class="win">
+                    <span class="win__bar"><i></i><i></i><i></i><span>AuditSync — conferência de termos</span></span>
+                    <span class="win__stats">
+                      <span><b>1.070</b>termos lidos</span>
+                      <span><b>4</b>bases cruzadas</span>
+                      <span><b>5 min</b>do PDF ao relatório</span>
+                    </span>
+                    <span class="win__table">
+                      <span class="win__row win__row--head"><span>Termo</span><span>Colaborador</span><span>Equipamento</span><span>Resultado</span></span>
+                      <span class="win__row"><span>0412</span><span>Matr. 10234</span><span>NB-5440 · série 7HX2Q</span><span class="ok">Confere</span></span>
+                      <span class="win__row"><span>0413</span><span>Matr. 10871</span><span>NB-5440 · série 9KD1M</span><span class="ok">Confere</span></span>
+                      <span class="win__row is-diff"><span>0414</span><span>Matr. 11206</span><span>MON-24 · série 3CQ81</span><span>Base diz 3CQ18 → corrigir?</span></span>
+                      <span class="win__row"><span>0415</span><span>Matr. 10045</span><span>NB-7420 · série 2BW5T</span><span class="ok">Confere</span></span>
+                      <span class="win__row is-warn"><span>0416</span><span>Matr. 12310</span><span>HEADSET · patr. 00981</span><span>Matrícula sem cadastro ativo</span></span>
+                      <span class="win__row"><span>0417</span><span>Matr. 10992</span><span>NB-5440 · série 6PL0R</span><span class="ok">Confere</span></span>
+                    </span>
+                  </span>
+                </span>
+              </span>
+            </button>
+            <div class="shot__body">
+              <div>
+                <p class="shot__tag mono">Automação · 2025</p>
+                <h3 class="shot__title" id="shot-audit">AuditSync</h3>
+              </div>
+              <div>
+                <p class="shot__desc">Conferência de termos de equipamentos contra quatro bases internas. O que era feito à mão virou um relatório de divergências.</p>
+                <ul class="shot__facts">
+                  <li>1.070 termos</li><li>4 bases</li><li>5 minutos</li>
+                </ul>
+                <button class="more" type="button" data-open="auditsync">Ver o projeto <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </div>
+          </article>
+
+          <a class="reel__end" href="#arquivo">
+            <span class="mono">Ainda tem mais</span>
+            <span class="reel__end-title">Oito projetos no arquivo</span>
+            <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 5v14m0 0-6-6m6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
         </div>
+      </div>
     </section>
 
-    <!-- Sobre -->
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title">Sobre Mim</h2>
-            <div class="about-content">
-                <p class="about-text">
-                    Sou um desenvolvedor full-stack criativo, apaixonado por transformar ideias em soluções reais. 
-                    Gosto de criar experiências intuitivas e resolver problemas que fazem diferença na vida das pessoas. 
-                    Tenho facilidade de aprendizado, sou proativo, paciente e penso fora da caixa.
-                </p>
+    <!-- Arquivo -->
+    <section class="section archive" id="arquivo" data-label="Arquivo" tabindex="-1">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow" data-reveal>Arquivo</p>
+          <h2 class="title" data-reveal="mask">Mais oito projetos</h2>
+          <p class="sec-head__text" data-reveal>Ferramentas internas, trabalhos para clientes e estudos. Abra cada um para ver o que tem por dentro.</p>
+        </header>
+
+        <div class="archive__list">
+          <details class="row" data-reveal>
+            <summary>
+              <span class="row__name">DUM Workspace</span>
+              <span class="row__kind">Produto DumTech · Windows</span>
+              <span class="row__stack">Python · PySide6 · SQLite</span>
+              <span class="row__year">2026</span>
+              <span class="row__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="row__body">
+              <p>Uma camada sobre o Windows que abre no que você estava fazendo: projetos, pastas, recentes, favoritos, busca e limpeza no mesmo lugar. O sistema de arquivos é a fonte da verdade; o banco guarda só a inteligência por cima dele.</p>
+              <ul>
+                <li>141 testes automatizados e um autoteste de 17 checagens dentro do próprio executável.</li>
+                <li>Ferramenta própria que mede a maior pausa da interface a cada versão.</li>
+                <li>Instalador para Windows e temas claro e escuro.</li>
+              </ul>
             </div>
+          </details>
+
+          <details class="row" data-reveal>
+            <summary>
+              <span class="row__name">PrintAgent</span>
+              <span class="row__kind">Ferramenta · impressão</span>
+              <span class="row__stack">Go · WebSocket · ESC/POS</span>
+              <span class="row__year">2026</span>
+              <span class="row__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="row__body">
+              <p>Agente para Windows que recebe os pedidos da loja por WebSocket e imprime na térmica da cozinha. É a ponta final do delivery da pizzaria.</p>
+              <ul>
+                <li>Modo simulação: decodifica os bytes ESC/POS e mostra a nota na tela — dá para testar sem impressora.</li>
+                <li>Exporta a nota simulada em TXT, PDF e PNG.</li>
+                <li>Binário único, sem dependências externas.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="row" data-reveal>
+            <summary>
+              <span class="row__name">DTCC</span>
+              <span class="row__kind">Sistema interno da DumTech</span>
+              <span class="row__stack">TypeScript · Vite · Supabase</span>
+              <span class="row__year">2026</span>
+              <span class="row__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="row__body">
+              <p>O sistema interno da DumTech, sem framework: um micro-kernel próprio (sinais reativos, roteador, cache) e um motor que gera as telas de cadastro a partir de uma definição — busca, filtros, paginação e validação incluídos.</p>
+              <ul>
+                <li>Cofre com criptografia no navegador (Argon2id + AES-256-GCM): o servidor nunca vê a senha.</li>
+                <li>Multiempresa desde o primeiro dia, com Row Level Security no Postgres.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="row" data-reveal>
+            <summary>
+              <span class="row__name">DTAC</span>
+              <span class="row__kind">Ferramenta pessoal</span>
+              <span class="row__stack">JavaScript · Supabase</span>
+              <span class="row__year">2026</span>
+              <span class="row__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="row__body">
+              <p>Painel pessoal com monitor de sites, cofre de senhas, vendas, tarefas em Kanban e vencimentos de domínio e hospedagem.</p>
+              <ul>
+                <li>Cofre zero-knowledge: senha-mestra separada do login, PBKDF2 com 210 mil iterações e AES-GCM no navegador.</li>
+                <li>Row Level Security por usuário em todas as tabelas.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="row" data-reveal>
+            <summary>
+              <span class="row__name">Landing com editor</span>
+              <span class="row__kind">Cliente · cosméticos</span>
+              <span class="row__stack">JavaScript · Supabase · Meta Pixel</span>
+              <span class="row__year">2026</span>
+              <span class="row__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="row__body">
+              <p>Página de venda de um produto de skincare com editor por blocos no próprio site: quem cuida da loja troca textos, fotos e links de checkout sem mexer em código.</p>
+              <ul>
+                <li>Editor por blocos em vez de arrastar e soltar livre — o site não quebra na mão de quem não é designer.</li>
+                <li>Rascunho e versões publicadas guardados no Supabase.</li>
+                <li>Pixel da Meta configurado para medir campanhas.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="row" data-reveal>
+            <summary>
+              <span class="row__name">FinanceSolux</span>
+              <span class="row__kind">Produto · finanças</span>
+              <span class="row__stack">JavaScript · Tailwind · Supabase</span>
+              <span class="row__year">2025</span>
+              <span class="row__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="row__body">
+              <p>Controle financeiro com painéis, receitas e despesas, recorrências e relatórios automáticos. Em 2026 ganhou um redesenho completo com foco em velocidade.</p>
+              <ul>
+                <li>Salva com confirmação do servidor, sem recarregar a tela.</li>
+                <li>Fontes e bibliotecas servidas pelo próprio site, sem depender de CDN.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="row" data-reveal>
+            <summary>
+              <span class="row__name">MyNexora</span>
+              <span class="row__kind">Conceito · 3D</span>
+              <span class="row__stack">Three.js · Next.js · TypeScript</span>
+              <span class="row__year">2025</span>
+              <span class="row__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="row__body">
+              <p>Shopping virtual em 3D: lojas montam e personalizam seus estandes e vendem dentro de um ambiente que você percorre como se fosse um espaço físico.</p>
+              <ul>
+                <li>Em desenvolvimento.</li>
+                <li>Three.js / WebGL, Next.js, TypeScript, Tailwind CSS, Supabase e APIs de pagamento.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="row" data-reveal>
+            <summary>
+              <span class="row__name">ParkEase</span>
+              <span class="row__kind">Desktop · estacionamento</span>
+              <span class="row__stack">Python · PyQt5</span>
+              <span class="row__year">2025</span>
+              <span class="row__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="row__body">
+              <p>Controle de estacionamento: vagas, entradas e saídas de veículos, pensado para operação rápida no guichê.</p>
+              <ul>
+                <li>Em desenvolvimento.</li>
+              </ul>
+            </div>
+          </details>
         </div>
+      </div>
     </section>
 
-    <!-- Habilidades -->
-    <section id="skills">
-        <div class="container">
-            <h2 class="section-title">Habilidades</h2>
-            
-            <!-- Front-end -->
-            <div class="skills-category">
-                <h3 class="category-title">🛠️ Front-end</h3>
-                <div class="skills-progress-grid">
-                    <div class="skill-progress-card">
-                        <div class="skill-header">
-                            <div class="skill-icon">🌐</div>
-                            <div class="skill-info">
-                                <h4 class="skill-name">HTML</h4>
-                                <span class="skill-level">90%</span>
-                            </div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="90"></div>
-                        </div>
-                        <p class="skill-description">Estrutura semântica e acessível</p>
-                    </div>
+    <!-- Trajetória -->
+    <section class="section path" id="trajetoria" data-label="Trajetória" tabindex="-1">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow" data-reveal>Trajetória</p>
+          <h2 class="title" data-reveal="mask">Cada trabalho virou ferramenta.</h2>
+          <p class="sec-head__text" data-reveal>Não comecei programando. Comecei conferindo, medindo e entregando — e é isso que eu ainda faço, agora com código.</p>
+        </header>
 
-                    <div class="skill-progress-card">
-                        <div class="skill-header">
-                            <div class="skill-icon">🎨</div>
-                            <div class="skill-info">
-                                <h4 class="skill-name">CSS</h4>
-                                <span class="skill-level">85%</span>
-                            </div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="85"></div>
-                        </div>
-                        <p class="skill-description">Layouts responsivos e animações</p>
-                    </div>
-
-                    <div class="skill-progress-card">
-                        <div class="skill-header">
-                            <div class="skill-icon">⚡</div>
-                            <div class="skill-info">
-                                <h4 class="skill-name">JavaScript</h4>
-                                <span class="skill-level">80%</span>
-                            </div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="80"></div>
-                        </div>
-                        <p class="skill-description">ES6+, DOM, APIs e lógica avançada</p>
-                    </div>
-
-                    <div class="skill-progress-card">
-                        <div class="skill-header">
-                            <div class="skill-icon">⚛️</div>
-                            <div class="skill-info">
-                                <h4 class="skill-name">React</h4>
-                                <span class="skill-level">75%</span>
-                            </div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="75"></div>
-                        </div>
-                        <p class="skill-description">Hooks, Context API, componentes</p>
-                    </div>
-
-                    <div class="skill-progress-card">
-                        <div class="skill-header">
-                            <div class="skill-icon">🚀</div>
-                            <div class="skill-info">
-                                <h4 class="skill-name">Next.js</h4>
-                                <span class="skill-level">70%</span>
-                            </div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="70"></div>
-                        </div>
-                        <p class="skill-description">SSR, SSG, App Router, API Routes</p>
-                    </div>
-
-                    <div class="skill-progress-card">
-                        <div class="skill-header">
-                            <div class="skill-icon">🎯</div>
-                            <div class="skill-info">
-                                <h4 class="skill-name">Tailwind CSS</h4>
-                                <span class="skill-level">85%</span>
-                            </div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="85"></div>
-                        </div>
-                        <p class="skill-description">Utility-first, design systems</p>
-                    </div>
-                </div>
+        <ol class="path__list">
+          <li class="step" data-reveal>
+            <p class="step__year">2018 <span>→ 2019</span></p>
+            <div class="step__body">
+              <h3 class="step__role">Auditor fiscal <span>brMalls</span></h3>
+              <p>Auditoria de faturamento e notas fiscais, conformidade tributária e contratual, relatórios para decisões da diretoria.</p>
+              <p class="step__kept"><span class="mono">Ficou</span>O olho para a divergência que ninguém vê.</p>
             </div>
-
-            <!-- Back-end & Dados -->
-            <div class="skills-category">
-                <h3 class="category-title">⚙️ Back-end & Dados</h3>
-                <div class="skills-progress-grid">
-                    <div class="skill-progress-card">
-                        <div class="skill-header">
-                            <div class="skill-icon">💚</div>
-                            <div class="skill-info">
-                                <h4 class="skill-name">Node.js</h4>
-                                <span class="skill-level">65%</span>
-                            </div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="65"></div>
-                        </div>
-                        <p class="skill-description">Express, APIs REST, middleware</p>
-                    </div>
-
-                    <div class="skill-progress-card">
-                        <div class="skill-header">
-                            <div class="skill-icon">🗄️</div>
-                            <div class="skill-info">
-                                <h4 class="skill-name">Supabase</h4>
-                                <span class="skill-level">75%</span>
-                            </div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="75"></div>
-                        </div>
-                        <p class="skill-description">PostgreSQL, Auth, Real-time</p>
-                    </div>
-
-                    <div class="skill-progress-card">
-                        <div class="skill-header">
-                            <div class="skill-icon">🐍</div>
-                            <div class="skill-info">
-                                <h4 class="skill-name">Python</h4>
-                                <span class="skill-level">60%</span>
-                            </div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="60"></div>
-                        </div>
-                        <p class="skill-description">Automação, scripts, APIs</p>
-                    </div>
-                </div>
+          </li>
+          <li class="step" data-reveal>
+            <p class="step__year">2019 <span>→ 2022</span></p>
+            <div class="step__body">
+              <h3 class="step__role">Análise e Desenvolvimento de Sistemas <span>Anhanguera · graduação</span></h3>
+              <p>Lógica, banco de dados, engenharia de software — e os primeiros sistemas de verdade.</p>
+              <p class="step__kept"><span class="mono">Ficou</span>A base para tudo o que veio depois.</p>
             </div>
-
-            <!-- Extras -->
-            <div class="skills-category">
-                <h3 class="category-title">🔍 Extras</h3>
-                <div class="skills-progress-grid">
-                    <div class="skill-progress-card">
-                        <div class="skill-header">
-                            <div class="skill-icon">🔧</div>
-                            <div class="skill-info">
-                                <h4 class="skill-name">Git</h4>
-                                <span class="skill-level">70%</span>
-                            </div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="70"></div>
-                        </div>
-                        <p class="skill-description">Controle de versão, GitHub</p>
-                    </div>
-
-                    <div class="skill-progress-card">
-                        <div class="skill-header">
-                            <div class="skill-icon">🔗</div>
-                            <div class="skill-info">
-                                <h4 class="skill-name">DOM</h4>
-                                <span class="skill-level">85%</span>
-                            </div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="85"></div>
-                        </div>
-                        <p class="skill-description">Manipulação de elementos</p>
-                    </div>
-
-                    <div class="skill-progress-card">
-                        <div class="skill-header">
-                            <div class="skill-icon">📋</div>
-                            <div class="skill-info">
-                                <h4 class="skill-name">JSON</h4>
-                                <span class="skill-level">90%</span>
-                            </div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" data-width="90"></div>
-                        </div>
-                        <p class="skill-description">Manipulação de dados</p>
-                    </div>
-                </div>
+          </li>
+          <li class="step" data-reveal>
+            <p class="step__year">2020 <span>→ 2023</span></p>
+            <div class="step__body">
+              <h3 class="step__role">Projetista de móveis e gerente de marcenaria <span>FMB Móveis Planejados</span></h3>
+              <p>Projetos 3D no Promob, detalhamento técnico, apresentação ao cliente, estoque, cronograma e uma equipe de seis pessoas.</p>
+              <p class="step__kept"><span class="mono">Ficou</span>Projetar sob medida e entregar no prazo.</p>
             </div>
-        </div>
+          </li>
+          <li class="step" data-reveal>
+            <p class="step__year">2023 <span>→ hoje</span></p>
+            <div class="step__body">
+              <h3 class="step__role">Analista de suporte N2 · gestão de ativos <span>Stefanini / Volkswagen Financial Services</span></h3>
+              <p>Relatórios com SQL e Excel avançado, inventário de hardware e software, escalonamentos com o N3 e documentação de incidentes.</p>
+              <p class="step__kept"><span class="mono">Ficou</span>Sistemas corporativos por dentro — e o AuditSync.</p>
+            </div>
+          </li>
+          <li class="step" data-reveal>
+            <p class="step__year">2023 <span>→ hoje</span></p>
+            <div class="step__body">
+              <h3 class="step__role">Dev full-stack e fundador <span>DumTech</span></h3>
+              <p>Produtos próprios para pequenos negócios e sistemas sob encomenda, do banco de dados ao instalador.</p>
+              <p class="step__kept"><span class="mono">Ficou</span>Tudo o que veio antes, no mesmo lugar.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
     </section>
 
-    <!-- Projetos -->
-    <section id="projects">
-        <div class="container">
-            <h2 class="section-title">Projetos</h2>
-            
-            <div class="projects-container">
-                <!-- Filtros -->
-                <div class="projects-filter">
-                    <button class="filter-btn active" data-filter="all">🌟 Todos</button>
-                    <button class="filter-btn" data-filter="completed">✅ Concluídos</button>
-                    <button class="filter-btn" data-filter="development">🚧 Em Desenvolvimento</button>
-                    <button class="filter-btn" data-filter="frontend">🎨 Frontend</button>
-                    <button class="filter-btn" data-filter="fullstack">⚡ Full-Stack</button>
-                </div>
+    <!-- Ficha técnica -->
+    <section class="section credits" id="ficha" data-label="Ficha técnica" tabindex="-1">
+      <div class="wrap">
+        <header class="sec-head sec-head--center">
+          <p class="eyebrow" data-reveal>Ficha técnica</p>
+          <h2 class="title" data-reveal="mask">Com o que eu construo</h2>
+        </header>
 
-                <!-- Timeline de Projetos -->
-                <div class="projects-timeline">
-                    <div class="timeline-line"></div>
-                    
-                    <!-- ParkEase -->
-                    <div class="project-timeline-item" data-category="development fullstack">
-                        <div class="timeline-dot"></div>
-                        <div class="project-card-new">
-                            <div class="project-header">
-                                <div class="project-icon">🅿️</div>
-                                <h3 class="project-title-new">ParkEase</h3>
-                                <div class="project-status-new status-development-new">
-                                    <span>🚧</span>
-                                    <span>Em Desenvolvimento</span>
-                                </div>
-                            </div>
-                            <div class="project-body">
-                                <p class="project-description-new">
-                                    Sistema completo de controle de estacionamento que facilita o gerenciamento de vagas, entradas e saídas de veículos. Desenvolvido com foco em usabilidade e eficiência, com interface intuitiva e responsiva.
-                                </p>
-                                <div class="project-tech-new">
-                                    <span class="tech-tag-new">Python</span>
-                                    <span class="tech-tag-new">PyQt5</span>
-                                </div>
-                                <div class="project-footer">
-                                    <div class="project-date-new">📅 Previsão Outubro 2025</div>
-                                    <div class="project-links-new">
-                                        <a href="#" class="project-link-new" style="pointer-events: none; opacity: 0.6;">
-                                            <span>🔗</span> GitHub (em breve)
-                                        </a>
-                                        <a href="#" class="project-link-new" style="pointer-events: none; opacity: 0.6;">
-                                            <span>🚀</span> Demo (em breve)
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-timeline-item" data-category="development fullstack">
-                        <div class="timeline-dot"></div>
-                        <div class="project-card-new">
-                            <div class="project-header">
-                                <div class="project-icon">🌐</div>
-                                <h3 class="project-title-new">MyNexora</h3>
-                                <div class="project-status-new status-development-new">
-                                    <span>🚧</span>
-                                    <span>Em desenvolvimento</span>
-                                </div>
-                            </div>
-                            <div class="project-body">
-                                <p class="project-description-new">
-                                    MyNexora é uma plataforma imersiva que conecta ambientes 3D com funcionalidade comercial. O objetivo é oferecer um espaço virtual onde lojas possam se alocar, personalizar seus estandes e vender produtos diretamente dentro de uma ambientação interativa.<br><br>
-                                    Unindo design, tecnologia web e visão de metaverso, a plataforma oferece uma nova experiência de navegação e compra, permitindo que o usuário explore as lojas como se estivesse em um espaço físico — tudo online.
-                                </p>
-                                <div class="project-tech-new">
-                                    <span class="tech-tag-new">Three.js / WebGL</span>
-                                    <span class="tech-tag-new">Next.js</span>
-                                    <span class="tech-tag-new">TypeScript</span>
-                                    <span class="tech-tag-new">Tailwind CSS</span>
-                                    <span class="tech-tag-new">Supabase / Firebase</span>
-                                    <span class="tech-tag-new">APIs de pagamento</span>
-                                </div>
-                                <div class="project-footer">
-                                    <div class="project-date-new">📅 Em andamento</div>
-                                    <div class="project-links-new">
-                                        <a href="#" class="project-link-new" style="pointer-events: none; opacity: 0.6;">
-                                            <span>🔗</span> GitHub (em breve)
-                                        </a>
-                                        <a href="#" class="project-link-new" style="pointer-events: none; opacity: 0.6;">
-                                            <span>🚀</span> Demo (em breve)
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-timeline-item" data-category="completed frontend">
-                        <div class="timeline-dot"></div>
-                        <div class="project-card-new">
-                            <div class="project-header">
-                                <div class="project-icon">🅰️</div>
-                                <h3 class="project-title-new">AuditSync</h3>
-                                <div class="project-status-new status-completed-new">
-                                    <span>✅</span>
-                                    <span>Concluído</span>
-                                </div>
-                            </div>
-                            <div class="project-body">
-                                <p class="project-description-new">
-                                    Sistema automatizado para leitura de termos de compromisso em PDF e validação cruzada com bases de dados internas. Identifica divergências entre os registros de equipamentos e dados de colaboradores, sugerindo correções automaticamente. Foco em confiabilidade e análise de inconsistências.
-                                </p>
-                                <div class="project-tech-new">
-                                    <span class="tech-tag-new">Python</span>
-                                    <span class="tech-tag-new">Tkinter</span>
-                                    <span class="tech-tag-new">Difflib</span>
-                                    <span class="tech-tag-new">CSV (Excel convertido)</span>
-                                </div>
-                                <div class="project-footer">
-                                    <div class="project-date-new">📅 Em andamento</div>
-                                    <div class="project-links-new">
-                                        <a href="#" class="project-link-new" style="pointer-events: none; opacity: 0.6;">
-                                            <span>🔗</span> GitHub (Privado)
-                                        </a>
-                                        <a href="#" class="project-link-new" style="pointer-events: none; opacity: 0.6;">
-                                            <span>🚀</span> Demo (Privado)
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-timeline-item" data-category="development fullstack">
-                        <div class="timeline-dot"></div>
-                        <div class="project-card-new">
-                            <div class="project-header">
-                                <div class="project-icon">💰</div>
-                                <h3 class="project-title-new">Finance Flow</h3>
-                                <div class="project-status-new status-development-new">
-                                    <span>⚙️</span>
-                                    <span>Em Desenvolvimento</span>
-                                </div>
-                            </div>
-                            <div class="project-body">
-                                <p class="project-description-new">
-                                    Aplicativo web de controle financeiro pessoal focado em simplicidade e uso diário. Permite que usuários registrem receitas e despesas de forma rápida, com categorização personalizada e resumo visual de gastos. Todos os dados são armazenados de forma segura no backend Supabase. Ideal para quem quer manter o controle financeiro diário sem complexidade.
-                                </p>
-                                <div class="project-tech-new">
-                                    <span class="tech-tag-new">HTML</span>
-                                    <span class="tech-tag-new">Tailwind CSS</span>
-                                    <span class="tech-tag-new">JavaScript</span>
-                                    <span class="tech-tag-new">Supabase (Auth + Banco)</span>
-                                </div>
-                                <div class="project-footer">
-                                    <div class="project-date-new">📅 Em andamento</div>
-                                    <div class="project-links-new">
-                                        <a href="#" class="project-link-new" style="pointer-events: none; opacity: 0.6;">
-                                            <span>🔗</span> GitHub (Privado)
-                                        </a>
-                                        <a href="#" class="project-link-new" style="pointer-events: none; opacity: 0.6;">
-                                            <span>🚀</span> Demo (em breve)
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
+        <dl class="credits__list">
+          <div class="credit" data-reveal><dt>Interface</dt><dd>HTML · CSS · JavaScript · TypeScript · React · Next.js · Tailwind CSS</dd></div>
+          <div class="credit" data-reveal><dt>Banco de dados</dt><dd>PostgreSQL · Supabase · SQLite · SQL</dd></div>
+          <div class="credit" data-reveal><dt>Servidor</dt><dd>Edge Functions · Node.js · APIs REST · Realtime · Web Push</dd></div>
+          <div class="credit" data-reveal><dt>Desktop</dt><dd>Python · PySide6 / Qt · Go · PyInstaller</dd></div>
+          <div class="credit" data-reveal><dt>3D</dt><dd>three.js · WebGL</dd></div>
+          <div class="credit" data-reveal><dt>Pagamentos</dt><dd>Pix · e-Rede · InfinitePay</dd></div>
+          <div class="credit" data-reveal><dt>Segurança</dt><dd>Row Level Security · AES-GCM · Argon2id · Ed25519</dd></div>
+          <div class="credit" data-reveal><dt>Qualidade</dt><dd>Testes automatizados · Playwright · Git · GitHub</dd></div>
+          <div class="credit" data-reveal><dt>IA no fluxo</dt><dd>Claude Code · agentes · automação</dd></div>
+          <div class="credit credit--lead" data-reveal><dt>Direção, roteiro e código</dt><dd>Eric Oliveira</dd></div>
+        </dl>
+      </div>
     </section>
 
     <!-- Contato -->
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title">Contato</h2>
-            <div class="contact-content">
-                <p style="color: #b0b0b0; margin-bottom: 3rem; font-size: 1.2rem; line-height: 1.6;">
-                    Vamos conversar sobre projetos e oportunidades!<br>
-                    <span style="font-size: 1rem; opacity: 0.8;">Entre em contato através dos canais abaixo ou envie uma mensagem direta.</span>
-                </p>
-                
-                <!-- Links de Contato -->
-                <div class="contact-links-grid">
-                    <a href="mailto:ericdudu1999@gmail.com" class="contact-card email-card">
-                        <div class="contact-icon">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                            </svg>
-                        </div>
-                        <div class="contact-info">
-                            <h3>Email</h3>
-                            <p>ericdudu1999@gmail.com</p>
-                        </div>
-                        <div class="contact-arrow" style="margin-left: -2rem;">→</div>
-                    </a>
+    <section class="contact" id="contato" data-label="Contato" data-scene="accent" tabindex="-1">
+      <div class="wrap contact__grid">
+        <div class="contact__lead">
+          <p class="eyebrow" data-reveal>Contato</p>
+          <h2 class="contact__title" data-reveal="mask">Vamos construir o próximo?</h2>
+          <p class="contact__text" data-reveal>Tem um sistema para tirar do papel ou uma vaga para preencher? Me conte o que você precisa. Respondo por e&#8209;mail.</p>
 
-                    <a href="https://www.linkedin.com/in/eric-oliveira-9703671b5/" class="contact-card linkedin-card" target="_blank">
-                        <div class="contact-icon">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                        </div>
-                        <div class="contact-info">
-                            <h3>LinkedIn</h3>
-                            <p>Conecte-se comigo</p>
-                        </div>
-                        <div class="contact-arrow">→</div>
-                    </a>
+          <div class="contact__mail" data-reveal>
+            <a class="mail" href="mailto:ericdudu1999@gmail.com">ericdudu1999@gmail.com</a>
+            <button class="copy" type="button" data-copy="ericdudu1999@gmail.com">Copiar</button>
+            <span class="sr-only" id="copy-status" role="status"></span>
+          </div>
 
-                    <a href="https://github.com/Eric1Oliveira" class="contact-card github-card" target="_blank">
-                        <div class="contact-icon">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                            </svg>
-                        </div>
-                        <div class="contact-info">
-                            <h3>GitHub</h3>
-                            <p>Veja meus projetos</p>
-                        </div>
-                        <div class="contact-arrow">→</div>
-                    </a>
-                </div>
+          <ul class="contact__links" data-reveal>
+            <li><a href="https://www.linkedin.com/in/eric-oliveira-9703671b5/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/Eric1Oliveira" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></li>
+            <li><a href="CVEricOliveira.pdf" download="Eric_Oliveira_CV.pdf">Currículo em PDF <span aria-hidden="true">↓</span></a></li>
+          </ul>
+        </div>
 
-                <!-- Formulário de Contato -->
-                <div class="contact-form-container">
-                    <h3 class="form-title">📬 Envie uma Mensagem</h3>
-                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/manbpwyv" method="POST">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="text" id="name" name="name" required>
-                                <label for="name">Nome *</label>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" id="email" name="email" required>
-                                <label for="email">Email *</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="subject" name="subject" required>
-                            <label for="subject">Assunto *</label>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                            <label for="message">Mensagem *</label>
-                        </div>
-                        <button type="submit" class="submit-btn">
-                            <span class="btn-text">Enviar Mensagem</span>
-                            <span class="btn-icon">🚀</span>
-                        </button>
-                    </form>
-                </div>
+        <form class="form" id="contactForm" action="https://formspree.io/f/manbpwyv" method="POST" data-reveal>
+          <fieldset class="chips">
+            <legend>Sobre o que é?</legend>
+            <label class="chip"><input type="radio" name="subject" value="Quero um sistema" checked><span>Quero um sistema</span></label>
+            <label class="chip"><input type="radio" name="subject" value="Tenho uma vaga"><span>Tenho uma vaga</span></label>
+            <label class="chip"><input type="radio" name="subject" value="Outro assunto"><span>Outro assunto</span></label>
+          </fieldset>
+          <div class="form__row">
+            <div class="field">
+              <label for="name">Nome</label>
+              <input id="name" name="name" type="text" autocomplete="name" required>
             </div>
-        </div>
+            <div class="field">
+              <label for="email">E-mail</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="message">Mensagem</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+          </div>
+          <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="form__actions">
+            <button class="btn btn--accent" type="submit" data-magnetic>Enviar mensagem</button>
+            <p class="form__status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+
+      <footer class="footer wrap">
+        <p>© 2026 Eric Oliveira</p>
+        <p>Fim — por enquanto.</p>
+        <a href="#inicio">Voltar ao início ↑</a>
+      </footer>
     </section>
+  </main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Eric Oliveira. Todos os direitos reservados.</p>
-        </div>
+  <!-- Linha do tempo (preenchida pelo main.js) -->
+  <nav class="timeline" aria-label="Linha do tempo da página" hidden>
+    <p class="timeline__now"><span class="timeline__label">Início</span><span class="timeline__time">00:00</span></p>
+    <div class="timeline__track">
+      <ol class="timeline__clips"></ol>
+      <span class="timeline__head" aria-hidden="true"></span>
+    </div>
+  </nav>
+
+  <!-- Menu do celular -->
+  <dialog class="menu" id="menu" aria-label="Menu" data-lenis-prevent>
+    <div class="menu__inner">
+      <div class="menu__top">
+        <span class="brand">Eric Oliveira</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-close>Fechar</button>
+      </div>
+      <nav class="menu__nav" aria-label="Seções">
+        <a href="#projetos">Projetos</a>
+        <a href="#arquivo">Arquivo</a>
+        <a href="#trajetoria">Trajetória</a>
+        <a href="#ficha">Ficha técnica</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <div class="menu__foot">
+        <a href="mailto:ericdudu1999@gmail.com">ericdudu1999@gmail.com</a>
+        <a href="CVEricOliveira.pdf" download="Eric_Oliveira_CV.pdf">Baixar currículo (PDF)</a>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Ficha de cada projeto -->
+  <dialog class="case" id="case" aria-labelledby="case-title" data-lenis-prevent>
+    <button class="case__close" type="button" data-close aria-label="Fechar">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+    </button>
+    <div class="case__body"></div>
+  </dialog>
+
+  <template id="case-hub">
+    <header class="case__head">
+      <p class="eyebrow">Produto DumTech · 2026</p>
+      <h2 class="case__title" id="case-title">DumTech Hub</h2>
+      <p class="case__lede">Sete sistemas de gestão num só aplicativo para Windows. Cada módulo é vendido separado e aparece no Hub conforme a licença do cliente.</p>
+    </header>
+    <figure class="case__figure">
+      <img src="assets/hub-inicio-1600.webp" width="1600" height="1000" alt="Tela inicial do DumTech Hub com os números do dia e os avisos de cada módulo.">
+    </figure>
+    <div class="case__cols">
+      <section>
+        <h3>O que faz</h3>
+        <ul>
+          <li>Estoque com custo médio, código de barras, contagem e venda fracionada (1,5 kg).</li>
+          <li>Balcão de vendas com caixa do dia, devolução e fechamento.</li>
+          <li>Financeiro, orçamentos, ordens de serviço, agenda e clientes conversando entre si.</li>
+          <li>Funciona sem internet: os dados ficam no computador do cliente.</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Por baixo</h3>
+        <ul>
+          <li>Licença assinada com Ed25519 e presa ao computador — copiar o arquivo não libera outra máquina.</li>
+          <li>Loja própria com checkout InfinitePay: o pagamento é conferido na API antes de a licença ser entregue.</li>
+          <li>Mais de 500 testes automatizados e instalador gerado com PyInstaller.</li>
+        </ul>
+      </section>
+    </div>
+    <figure class="case__figure">
+      <img src="assets/hub-balcao-1600.webp" width="1600" height="1000" loading="lazy" alt="Balcão de vendas do DumTech Hub com itens bipados, desconto e total da venda.">
+    </figure>
+    <footer class="case__foot">
+      <p class="case__stack">Python · PySide6 · SQLite · Supabase · Edge Functions · InfinitePay</p>
+      <a class="btn btn--accent" href="https://dumtech-hub.netlify.app" target="_blank" rel="noopener">Conhecer o DumTech Hub <span aria-hidden="true">↗</span></a>
     </footer>
+  </template>
 
-    <!-- Botão voltar ao topo -->
-    <button class="back-to-top" id="backToTop">↑</button>
+  <template id="case-delivery">
+    <header class="case__head">
+      <p class="eyebrow">Cliente · em produção</p>
+      <h2 class="case__title" id="case-title">Delivery de pizzaria</h2>
+      <p class="case__lede">Loja online, painel do restaurante e impressão automática na cozinha. Entreguei a primeira versão e sigo evoluindo o sistema com o cliente — hoje ele está na oitava versão.</p>
+    </header>
+    <div class="case__cols">
+      <section>
+        <h3>O que faz</h3>
+        <ul>
+          <li>Cardápio com adicionais, carrinho e pagamento online integrado à e-Rede (Itaú), com Pix.</li>
+          <li>Painel do restaurante com som de novo pedido, fluxo de status por canal (entrega, retirada, mesa) e relatórios por turno.</li>
+          <li>O cliente confirma o endereço num pino no mapa; fora da área de entrega, o pedido não fecha.</li>
+          <li>Avisos no celular quando o pedido é confirmado, vai para o forno e sai para entrega.</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Por baixo</h3>
+        <ul>
+          <li>O pedido só entra no banco depois de pago — a cozinha nunca recebe pedido fantasma.</li>
+          <li>Um gatilho no Postgres avisa uma Edge Function, que monta a nota em ESC/POS e envia por WebSocket a um agente em Go ligado à impressora térmica.</li>
+          <li>Distância calculada no elipsoide WGS84, com erro de milímetros, e frete por faixa de quilômetro.</li>
+          <li>Fila no servidor e alerta no painel recuperam pagamentos Pix se a sessão do celular cair no meio do caminho.</li>
+        </ul>
+      </section>
+    </div>
+    <footer class="case__foot">
+      <p class="case__stack">JavaScript · Supabase (Postgres, Realtime, Edge Functions) · Go · ESC/POS · Web Push · Leaflet · e-Rede</p>
+      <p class="case__note">Projeto de cliente: nome e endereço ficam de fora.</p>
+    </footer>
+  </template>
 
-    <script>
-        // Typing Animation
-        const typingText = document.getElementById('typingText');
-        const phrases = [
-            'Desenvolvedor Full-Stack em Formação',
-            'Criativo e Apaixonado por Tecnologia',
-            'Transformando Ideias em Código'
-        ];
-        
-        let currentPhrase = 0;
-        let currentChar = 0;
-        let isDeleting = false;
-        
-        function typeWriter() {
-            const current = phrases[currentPhrase];
-            
-            if (isDeleting) {
-                typingText.textContent = current.substring(0, currentChar - 1);
-                currentChar--;
-            } else {
-                typingText.textContent = current.substring(0, currentChar + 1);
-                currentChar++;
-            }
-            
-            let typeSpeed = isDeleting ? 50 : 100;
-            
-            if (!isDeleting && currentChar === current.length) {
-                typeSpeed = 2000; // Pause at end
-                isDeleting = true;
-            } else if (isDeleting && currentChar === 0) {
-                isDeleting = false;
-                currentPhrase = (currentPhrase + 1) % phrases.length;
-                typeSpeed = 500; // Pause before next phrase
-            }
-            
-            setTimeout(typeWriter, typeSpeed);
-        }
+  <template id="case-cmv">
+    <header class="case__head">
+      <p class="eyebrow">Produto DumTech · SaaS</p>
+      <h2 class="case__title" id="case-title">CMV Pro</h2>
+      <p class="case__lede">Gestão de custo para restaurantes: ficha técnica, CMV, precificação, estoque, compras e financeiro — com a conta certa do custo de cada prato.</p>
+    </header>
+    <div class="case__cols">
+      <section>
+        <h3>O que faz</h3>
+        <ul>
+          <li>Ficha técnica com custo por ingrediente e preço sugerido para a meta de CMV.</li>
+          <li>Simulador de preço, estoque e compras, fluxo de caixa com baixa automática das vendas.</li>
+          <li>Relatórios em CSV, Excel e PDF; backup e restauração em JSON.</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Por baixo</h3>
+        <ul>
+          <li>Aplicação de página única sem framework: ES Modules, roteador próprio e 17 telas carregadas sob demanda.</li>
+          <li>Motor de cálculo puro, separado da interface — a mesma conta vale em todas as telas.</li>
+          <li>Camada de dados com contrato único: roda local ou no Supabase sem mudar as telas.</li>
+          <li>Instala como aplicativo (PWA), com service worker.</li>
+        </ul>
+      </section>
+    </div>
+    <footer class="case__foot">
+      <p class="case__stack">JavaScript · ES Modules · Supabase · PWA</p>
+    </footer>
+  </template>
 
-        typeWriter();
-        
-        document.getElementById('downloadCV').addEventListener('click', function(e) {
-            e.preventDefault();
+  <template id="case-dumos">
+    <header class="case__head">
+      <p class="eyebrow">Ferramenta pessoal · IA</p>
+      <h2 class="case__title" id="case-title">DUM OS</h2>
+      <p class="case__lede">Minha central de trabalho. Cada empresa vira uma ilha num mundo 3D, cada projeto uma construção — e uma fila manda tarefas para o Claude enquanto eu acompanho o progresso.</p>
+    </header>
+    <figure class="case__figure">
+      <img src="assets/dumos-mundo-1440.webp" width="1440" height="900" alt="DUM OS: ilhas 3D ao entardecer, uma para cada empresa, com o painel de missões ao lado.">
+    </figure>
+    <div class="case__cols">
+      <section>
+        <h3>O que faz</h3>
+        <ul>
+          <li>Mundo 3D com céu que acompanha a hora e o clima.</li>
+          <li>Missões: peço uma tarefa em português, acompanho e aprovo.</li>
+          <li>Busca, widgets e a memória de cada projeto num só lugar.</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Por baixo</h3>
+        <ul>
+          <li>Uma tarefa por vez; se o app fecha no meio, ela volta pausada e nunca roda sozinha de novo.</li>
+          <li>O que o agente aprende entra como memória sugerida e só vale depois de aprovado.</li>
+          <li>Permissões de enviar e editar começam em "perguntar".</li>
+          <li>Interface em HTML, CSS e three.js dentro de um app PySide6 (QtWebEngine).</li>
+        </ul>
+      </section>
+    </div>
+    <footer class="case__foot">
+      <p class="case__stack">Python · PySide6 · QtWebEngine · three.js · SQLite · Claude Code</p>
+    </footer>
+  </template>
 
-            // Caminho do seu PDF (ajuste se estiver em uma subpasta, ex: './assets/Eric_Oliveira_CV.pdf')
-            const pdfUrl = './CVEricOliveira.pdf';
-
-            // Cria um link temporário para download
-            const a = document.createElement('a');
-            a.href = pdfUrl;
-            a.download = 'Eric_Oliveira_CV.pdf';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-
-            // Feedback visual
-            const originalText = this.innerHTML;
-            this.innerHTML = '✅ Download iniciado!';
-            this.style.background = '#4caf50';
-            this.style.borderColor = '#4caf50';
-            this.style.color = '#ffffff';
-
-            setTimeout(() => {
-                this.innerHTML = originalText;
-                this.style.background = '';
-                this.style.borderColor = '';
-                this.style.color = '';
-            }, 2000);
-        });
-
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.querySelector('.theme-icon');
-        const themeText = document.querySelector('.theme-text');
-        const body = document.body;
-
-        // Verificar tema salvo no localStorage
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            body.classList.add('light-theme');
-            themeIcon.textContent = '☀️';
-            themeText.textContent = 'Claro';
-        }
-
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('light-theme');
-            
-            if (body.classList.contains('light-theme')) {
-                themeIcon.textContent = '☀️';
-                themeText.textContent = 'Claro';
-                localStorage.setItem('theme', 'light');
-            } else {
-                themeIcon.textContent = '🌙';
-                themeText.textContent = 'Escuro';
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-
-        // Botão voltar ao topo
-        const backToTopButton = document.getElementById('backToTop');
-
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.add('visible');
-            } else {
-                backToTopButton.classList.remove('visible');
-            }
-        });
-
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Animação de entrada dos elementos
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observar elementos para animação
-        document.querySelectorAll('.skill-progress-card, .project-timeline-item, .about-text').forEach(el => {
-            if (el.classList.contains('project-timeline-item')) {
-                observer.observe(el);
-            } else {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(el);
-            }
-        });
-
-        // Animação das barras de progresso
-        const progressObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const progressFill = entry.target.querySelector('.progress-fill');
-                    if (progressFill) {
-                        const width = progressFill.getAttribute('data-width');
-                        setTimeout(() => {
-                            progressFill.style.width = width + '%';
-                        }, 300);
-                    }
-                }
-            });
-        }, { threshold: 0.5 });
-
-        // Observar cards de habilidades para animação das barras
-        document.querySelectorAll('.skill-progress-card').forEach(card => {
-            progressObserver.observe(card);
-        });
-
-        // Animação específica para timeline items
-        const timelineObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-                }
-            });
-        }, { threshold: 0.2 });
-
-        document.querySelectorAll('.project-timeline-item').forEach(item => {
-            timelineObserver.observe(item);
-        });
-
-        // Filtros de projetos
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const projectItems = document.querySelectorAll('.project-timeline-item');
-
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Remove active class from all buttons
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                // Add active class to clicked button
-                button.classList.add('active');
-
-                const filterValue = button.getAttribute('data-filter');
-
-                projectItems.forEach(item => {
-                    const categories = item.getAttribute('data-category');
-                    
-                    if (filterValue === 'all' || categories.includes(filterValue)) {
-                        item.style.display = 'flex';
-                        // Re-trigger animation
-                        setTimeout(() => {
-                            item.classList.add('animate');
-                        }, 100);
-                    } else {
-                        item.style.display = 'none';
-                        item.classList.remove('animate');
-                    }
-                });
-            });
-        });
-
-        // Menu mobile (funcionalidade básica)
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
-
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('open');
-        });
-
-        // Fechar menu mobile ao clicar em um link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 768) {
-                    navLinks.classList.remove('open');
-                }
-            });
-        });
-
-
-        // Destacar link ativo na navegação
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section');
-            const navLinksArray = document.querySelectorAll('.nav-links a');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinksArray.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').substring(1) === current) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // Enhanced form field animations
-        document.querySelectorAll('.form-group input, .form-group textarea').forEach(field => {
-            field.addEventListener('focus', function() {
-                this.parentElement.classList.add('focused');
-                this.parentElement.classList.remove('error');
-            });
-            
-            field.addEventListener('blur', function() {
-                if (!this.value.trim()) {
-                    this.parentElement.classList.remove('focused');
-                } else {
-                    this.parentElement.classList.add('focused');
-                }
-            });
-            
-            field.addEventListener('input', function() {
-                if (this.value.trim()) {
-                    this.parentElement.classList.add('focused');
-                    this.parentElement.classList.remove('error');
-                }
-            });
-            
-            // Check if field has value on page load
-            if (field.value.trim()) {
-                field.parentElement.classList.add('focused');
-            }
-        });
-
-        // Add enhanced animations for success message
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideInUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-            
-            @keyframes successSlideIn {
-                from {
-                    opacity: 0;
-                    transform: translateY(50px) scale(0.9);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0) scale(1);
-                }
-            }
-            
-            @keyframes successShimmer {
-                0% { left: -100%; }
-                100% { left: 100%; }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
+  <template id="case-auditsync">
+    <header class="case__head">
+      <p class="eyebrow">Automação · 2025</p>
+      <h2 class="case__title" id="case-title">AuditSync</h2>
+      <p class="case__lede">Conferência de termos de compromisso de equipamentos contra quatro bases internas. São 1.070 termos que eram conferidos à mão e agora saem num relatório em 5 minutos.</p>
+    </header>
+    <div class="case__cols">
+      <section>
+        <h3>O que faz</h3>
+        <ul>
+          <li>Lê os termos em PDF e cruza com as bases de equipamentos e de colaboradores.</li>
+          <li>Aponta cada divergência — série, patrimônio, colaborador — com a correção provável.</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Por baixo</h3>
+        <ul>
+          <li>Comparação aproximada com difflib para achar o registro certo mesmo com erro de digitação.</li>
+          <li>Bases em Excel convertidas para CSV e uma interface simples em Tkinter para quem opera.</li>
+          <li>Nasceu do meu dia a dia com gestão de ativos.</li>
+        </ul>
+      </section>
+    </div>
+    <footer class="case__foot">
+      <p class="case__stack">Python · Tkinter · difflib · CSV / Excel</p>
+      <p class="case__note">Ferramenta interna: código e dados são privados.</p>
+    </footer>
+  </template>
 </body>
 </html>

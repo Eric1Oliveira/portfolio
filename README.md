@@ -1,41 +1,44 @@
-Portfólio - Eric Oliveira
+# Portfólio — Eric Oliveira
 
-Este é meu portfólio pessoal como desenvolvedor em formação.  
-Feito com **HTML, CSS, JavaScript**
+Dev full-stack e fundador da DumTech. Portfólio em HTML, CSS e JavaScript puros, sem build.
 
-## ✍️ Sobre mim
+**Ao vivo:** https://eric1oliveira.github.io/portfolio/
 
-Sou alguém apaixonado por criar coisas novas, resolver problemas reais e construir com propósito.  
-Ainda estou aprendendo, mas cada parte deste projeto representa **o que sei hoje e o que quero dominar amanhã**.
+## O que tem na página
 
-- 🎨 Gosto de interfaces bonitas e acessíveis  
-- ⚙️ Me interesso por desenvolvimento full-stack (front + back)  
-- 🤝 Uso IA como ferramenta de apoio para aprender mais rápido  
-- 📈 Quero evoluir e trabalhar com tecnologia de forma criativa e autêntica
+- **Abertura** — o nome é iluminado por um "holofote" que segue o mouse (fonte variável Anybody).
+- **Sobre** — manifesto que acende palavra por palavra com o scroll.
+- **Projetos em destaque** — rolo horizontal no desktop (lista vertical no celular), com ficha de cada projeto.
+- **Arquivo** — os demais projetos em linhas que abrem.
+- **Trajetória**, **Ficha técnica** (stack em formato de créditos de filme) e **Contato** com formulário.
 
-## 🚀 Tecnologias usadas
+Tema claro/escuro, scroll suave, cursor próprio e linha do tempo de navegação. Com "reduzir movimento" ligado
+no sistema, as animações saem e o rolo vira lista; sem JavaScript, todo o conteúdo continua visível.
 
-- HTML5  
-- CSS3  
-- JavaScript  
-- Tailwind CSS *(em breve)*  
-- React / Next.js *(em breve)*
+## Arquivos
 
-## 🛠️ Status
+```
+index.html            conteúdo (projetos, fichas em <template>, textos)
+style.css             tokens de cor e tipo no topo, depois cada seção
+main.js               interações
+assets/               prints dos projetos (.webp), favicon e imagem de compartilhamento (og.jpg)
+CVEricOliveira.pdf    currículo para download
+```
 
-> Este projeto está em constante evolução.  
-> Atualizações frequentes à medida que aprendo e melhoro minhas habilidades.
+- **Novo projeto em destaque:** copie um `<article class="shot">` no `index.html` e crie o `<template id="case-...">`
+  correspondente (o botão usa `data-open="..."`). Atualize o "/ 05" do contador.
+- **Novo projeto no arquivo:** copie um `<details class="row">`.
+- **Formulário:** envia para o Formspree (`formspree.io/f/manbpwyv`).
 
-## 🌐 Acesse online
+## Rodar localmente
 
-**[Clique aqui para ver o portfólio ao vivo](https://eric1oliveira.github.io/portfolio/)**
+```
+python -m http.server 8000
+```
 
-## 📫 Contato
+e abra http://localhost:8000.
 
-Se quiser bater um papo, colaborar ou dar feedback:
+## Dependências externas
 
-- [LinkedIn](https://www.linkedin.com/in/eric-oliveira-9703671b5/)  
-- [GitHub](https://github.com/Eric1Oliveira)  
-- Email: ericdudu1999@gmail.com
-
----
+Google Fonts (Anybody, Instrument Sans, Fragment Mono) e [Lenis](https://github.com/darkroomengineering/lenis) 1.3.4
+para o scroll suave. Se o Lenis não carregar, a página usa o scroll normal do navegador.

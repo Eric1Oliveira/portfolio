@@ -1,805 +1,712 @@
 <!doctype html>
-<html lang="pt-BR" data-theme="dark" data-scene="base">
+<html lang="pt-BR" class="no-js">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Eric Oliveira — Dev full-stack e fundador da DumTech</title>
-  <meta name="description" content="Eric Oliveira, desenvolvedor full-stack e fundador da DumTech. Sistemas de gestão, delivery com impressão automática, SaaS para restaurantes e automações — do banco de dados ao balcão.">
+  <title>Eric Oliveira — Dev full-stack</title>
+  <meta name="description" content="Eric Oliveira, dev full-stack e fundador da DumTech. Projetos em produção, testados antes de entregar: sistemas de gestão, delivery com impressão automática, SaaS para restaurantes e automações.">
   <meta name="author" content="Eric Oliveira">
-  <meta name="theme-color" content="#0b1416">
+  <meta name="theme-color" content="#151413">
   <link rel="canonical" href="https://eric1oliveira.github.io/portfolio/">
-
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:url" content="https://eric1oliveira.github.io/portfolio/">
-  <meta property="og:title" content="Eric Oliveira — Dev full-stack e fundador da DumTech">
-  <meta property="og:description" content="Construo software que põe negócios para rodar: do balcão ao banco de dados, até a nota que sai impressa na cozinha.">
+  <meta property="og:title" content="Eric Oliveira — Dev full-stack">
+  <meta property="og:description" content="Sistemas que vão para produção e ficam de pé — do banco de dados ao instalador, com teste antes de entregar.">
   <meta property="og:image" content="https://eric1oliveira.github.io/portfolio/assets/og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-
-  <script>
-    (function () {
-      var d = document.documentElement;
-      d.classList.add('js');
-      try {
-        var t = localStorage.getItem('theme');
-        if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
-      } catch (e) {}
-      // Se o main.js não rodar, nada fica escondido esperando animação.
-      setTimeout(function () { if (!window.__eo) d.classList.remove('js'); }, 4000);
-    })();
-  </script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Fragment+Mono&family=Instrument+Sans:wght@400..700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Martian+Mono:wdth,wght@75..112.5,300..600&display=swap">
   <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+  <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js" } }</script>
   <script src="https://unpkg.com/lenis@1.3.4/dist/lenis.min.js" defer></script>
-  <script src="main.js" defer></script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Eric Oliveira",
-    "jobTitle": "Desenvolvedor full-stack",
-    "url": "https://eric1oliveira.github.io/portfolio/",
-    "email": "mailto:ericdudu1999@gmail.com",
-    "worksFor": { "@type": "Organization", "name": "DumTech" },
-    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Anhanguera" },
-    "address": { "@type": "PostalAddress", "addressLocality": "São Paulo", "addressCountry": "BR" },
-    "sameAs": [
-      "https://www.linkedin.com/in/eric-oliveira-9703671b5/",
-      "https://github.com/Eric1Oliveira"
-    ]
-  }
-  </script>
+  <script type="module" src="main.js"></script>
 </head>
 <body>
   <a class="skip" href="#projetos">Pular para os projetos</a>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="cursor" aria-hidden="true"><span class="cursor__label">Abrir</span></div>
 
-  <!-- Barra do topo -->
-  <header class="topbar">
-    <a class="brand" href="#inicio">Eric Oliveira</a>
-    <nav class="topnav" aria-label="Principal">
-      <a href="#projetos">Projetos</a>
-      <a href="#trajetoria">Trajetória</a>
-      <a href="#ficha">Ficha técnica</a>
-      <a href="#contato">Contato</a>
+  <canvas class="world" id="world" aria-hidden="true"></canvas>
+  <div class="scrim" aria-hidden="true"></div>
+
+  <div class="hud" aria-hidden="true">
+    <i class="hud__tick hud__tick--tl"></i><i class="hud__tick hud__tick--tr"></i>
+    <i class="hud__tick hud__tick--bl"></i><i class="hud__tick hud__tick--br"></i>
+    <p class="hud__where"><span id="hudSec">Início</span><span class="hud__build" id="hudBuild"></span></p>
+    <p class="hud__cap" id="hudCap">1.600 blocos · role para construir</p>
+  </div>
+
+  <header class="bar">
+    <a class="brand" href="#inicio" aria-label="Eric Oliveira, voltar ao início">
+      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5l10 5.6L16 16 6 10.6z" fill="#ff8a5c"/><path d="M6 10.6 16 16v11.4L6 21.8z" fill="#ff5a1f"/><path d="M26 10.6V21.8l-10 5.6V16z" fill="#c4410f"/></svg>
+      <span>Eric Oliveira</span>
+    </a>
+    <nav class="nav" aria-label="Seções">
+      <a href="#projetos" data-nav="projetos">Projetos</a>
+      <a href="#testes" data-nav="testes">Testes</a>
+      <a href="#cv" data-nav="cv">Currículo</a>
+      <a href="#contato" data-nav="contato">Contato</a>
     </nav>
-    <div class="topbar__actions">
-      <button class="icon-btn" type="button" data-theme-toggle aria-label="Mudar para o tema claro">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 3.75a8.25 8.25 0 0 1 0 16.5z" fill="currentColor"/></svg>
-      </button>
-      <a class="btn btn--ghost btn--sm topbar__cv" href="CVEricOliveira.pdf" download="Eric_Oliveira_CV.pdf">Baixar CV</a>
-      <button class="btn btn--ghost btn--sm menu-btn" type="button" data-menu aria-expanded="false" aria-controls="menu">Menu</button>
-    </div>
+    <a class="btn btn--sm bar__cv" href="CVEricOliveira.pdf" download>Baixar CV <span aria-hidden="true">↓</span></a>
   </header>
 
-  <main id="conteudo">
+  <main>
+    <!-- ============ INÍCIO ============ -->
+    <section class="hero" id="inicio" data-anchor data-sec="inicio" data-label="Início" data-form="hero" data-caption="1.600 blocos · role para construir">
+      <p class="hero__meta">
+        <span>Dev full-stack</span>
+        <span>Fundador da DumTech</span>
+        <span>São Paulo · <time id="clock">--:--</time></span>
+      </p>
 
-    <!-- Abertura -->
-    <section class="hero" id="inicio" data-label="Início" tabindex="-1">
-      <div class="hero__spot" aria-hidden="true"></div>
-
-      <div class="hero__meta">
-        <p class="mono" data-intro style="--d: 650">Dev full-stack · Fundador da DumTech</p>
-        <p class="mono" data-intro style="--d: 750">São Paulo, Brasil</p>
+      <div class="hero__side">
+        <p class="hero__lead">Construo sistemas que vão para produção e ficam de pé — do banco de dados ao instalador, com teste antes de entregar.</p>
+        <div class="hero__cta">
+          <a class="btn btn--sig" href="#projetos">Ver projetos</a>
+          <a class="btn" href="CVEricOliveira.pdf" download>Baixar currículo</a>
+        </div>
+        <button class="chip gyro" id="gyro" type="button" hidden>Mover o canteiro com o celular</button>
       </div>
 
-      <h1 class="hero__name">
-        <span class="sr-only">Eric Oliveira</span>
-        <span class="name-line" aria-hidden="true" data-letters>Eric</span>
-        <span class="name-line name-line--2" aria-hidden="true" data-letters>Oliveira</span>
+      <h1 class="name" aria-label="Eric Oliveira">
+        <span class="name__line" aria-hidden="true"><span style="--i:0">E</span><span style="--i:1">R</span><span style="--i:2">I</span><span style="--i:3">C</span></span>
+        <span class="name__line" aria-hidden="true"><span style="--i:4">O</span><span style="--i:5">L</span><span style="--i:6">I</span><span style="--i:7">V</span><span style="--i:8">E</span><span style="--i:9">I</span><span style="--i:10">R</span><span style="--i:11">A</span></span>
       </h1>
-
-      <div class="hero__foot">
-        <p class="hero__lede" data-intro style="--d: 900">Construo software que põe negócios para rodar: do balcão ao banco de dados, até a nota que sai impressa na cozinha.</p>
-        <div class="hero__cta" data-intro style="--d: 1050">
-          <a class="btn btn--accent" href="#contato" data-subject="Quero um sistema" data-magnetic>Pedir um projeto</a>
-          <a class="btn btn--ghost" href="CVEricOliveira.pdf" download="Eric_Oliveira_CV.pdf" data-magnetic>
-            Baixar currículo
-            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 4v12m0 0-5-5m5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </div>
     </section>
 
-    <!-- Sobre / manifesto -->
-    <section class="about" id="sobre" data-label="Sobre" data-scene="inverse" tabindex="-1">
-      <div class="about__pin">
-        <p class="eyebrow">Sobre</p>
-        <p class="manifesto" data-scrub>Comecei auditando notas fiscais. Depois desenhei móveis sob medida e tomei conta de uma marcenaria com seis pessoas. Hoje cuido de sistemas corporativos e construo os meus na DumTech. <em>Mudou a ferramenta, não o ofício:</em> medir antes de cortar, construir para durar, entregar funcionando.</p>
-      </div>
-    </section>
+    <!-- ============ PROJETOS ============ -->
+    <section class="projects" id="projetos" data-anchor="mob" data-sec="projetos" data-label="Projetos" data-form="deck">
+      <header class="head wrap">
+        <p class="eyebrow">Projetos em destaque</p>
+        <h2 class="h2" data-reveal><span>Feito para ser usado.</span></h2>
+        <p class="lead">Um produto à venda, um sistema de cliente em produção, um SaaS em construção, a central onde eu trabalho e uma automação que trocou horas por cinco minutos.</p>
+      </header>
 
-    <!-- Projetos em destaque (rolo horizontal no desktop) -->
-    <section class="reel" id="projetos" data-label="Projetos" tabindex="-1">
-      <div class="reel__pin">
-        <p class="reel__count mono" aria-hidden="true"><span data-reel-count>01</span> / 05</p>
-        <div class="reel__track">
+      <p class="deck-cap" id="deckCap" aria-hidden="true"></p>
 
-          <header class="reel__intro">
-            <p class="eyebrow" data-reveal>Projetos em destaque</p>
-            <h2 class="title" data-reveal="mask">Feito para ser usado.</h2>
-            <p class="reel__text" data-reveal>Produtos da DumTech, um sistema de cliente em produção, uma automação que trocou conferência manual por cinco minutos e a central onde eu trabalho.</p>
-            <p class="reel__hint mono" aria-hidden="true">Role para avançar <span>→</span></p>
-          </header>
-
-          <!-- DumTech Hub -->
-          <article class="shot" aria-labelledby="shot-hub">
-            <button class="shot__media" type="button" data-open="hub" data-cursor="view" aria-label="Abrir o projeto DumTech Hub">
-              <span class="shot__frame">
-                <img src="assets/hub-inicio-1600.webp" srcset="assets/hub-inicio-900.webp 900w, assets/hub-inicio-1600.webp 1600w" sizes="(min-width: 900px) 70vw, 100vw" width="1600" height="1000" loading="lazy" decoding="async" alt="">
-              </span>
-            </button>
-            <div class="shot__body">
-              <div>
-                <p class="shot__tag mono">Produto DumTech · 2026</p>
-                <h3 class="shot__title" id="shot-hub">DumTech Hub</h3>
-              </div>
-              <div>
-                <p class="shot__desc">Sete sistemas de gestão num só aplicativo para Windows: estoque, balcão, financeiro, orçamentos, ordens de serviço, agenda e clientes.</p>
-                <ul class="shot__facts">
-                  <li>7 módulos</li><li>+500 testes</li><li>Funciona offline</li>
-                </ul>
-                <button class="more" type="button" data-open="hub">Ver o projeto <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              </div>
-            </div>
-          </article>
-
-          <!-- Delivery da pizzaria (cliente) -->
-          <article class="shot" aria-labelledby="shot-delivery">
-            <button class="shot__media" type="button" data-open="delivery" data-cursor="view" aria-label="Abrir o projeto Delivery de pizzaria">
-              <span class="shot__frame">
-                <span class="art art--delivery" aria-hidden="true">
-                  <span class="receipt-wrap">
-                    <span class="receipt">
-                      <span class="receipt__head">PEDIDO #1287<br>ENTREGA · 19:42</span>
-                      <span class="receipt__rule"></span>
-                      <span class="receipt__row"><span>1x PIZZA MARGHERITA G</span><span>64,90</span></span>
-                      <span class="receipt__row receipt__row--sub"><span>+ borda catupiry</span><span>8,00</span></span>
-                      <span class="receipt__row"><span>1x PIZZA CALABRESA M</span><span>49,90</span></span>
-                      <span class="receipt__row"><span>1x REFRIGERANTE 2L</span><span>14,00</span></span>
-                      <span class="receipt__rule"></span>
-                      <span class="receipt__row"><span>FRETE · 3,2 KM</span><span>9,00</span></span>
-                      <span class="receipt__row receipt__total"><span>TOTAL</span><span>R$ 145,80</span></span>
-                      <span class="receipt__rule"></span>
-                      <span class="receipt__paid">PAGO · PIX</span>
-                    </span>
-                  </span>
-                  <span class="flow">
-                    <span class="flow__item"><b>19:42</b>Pagamento confirmado</span>
-                    <span class="flow__item"><b>19:42</b>Nota impressa na cozinha</span>
-                    <span class="flow__item"><b>19:51</b>Cliente avisado: no forno</span>
-                    <span class="flow__item is-now"><b>20:13</b>Saiu para entrega</span>
-                  </span>
-                </span>
-              </span>
-            </button>
-            <div class="shot__body">
-              <div>
-                <p class="shot__tag mono">Cliente · em produção</p>
-                <h3 class="shot__title" id="shot-delivery">Delivery de pizzaria</h3>
-              </div>
-              <div>
-                <p class="shot__desc">Loja online, painel do restaurante e impressão automática na cozinha. O pedido chega pago, sai impresso e o cliente acompanha cada etapa pelo celular.</p>
-                <ul class="shot__facts">
-                  <li>Pix integrado</li><li>Impressão automática</li><li>Avisos no celular</li>
-                </ul>
-                <button class="more" type="button" data-open="delivery">Ver o projeto <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              </div>
-            </div>
-          </article>
-
-          <!-- CMV Pro -->
-          <article class="shot" aria-labelledby="shot-cmv">
-            <button class="shot__media" type="button" data-open="cmv" data-cursor="view" aria-label="Abrir o projeto CMV Pro">
-              <span class="shot__frame">
-                <span class="art art--cmv" aria-hidden="true">
-                  <span class="sheet">
-                    <span class="sheet__top"><b>CMV Pro</b><span>Fichas técnicas › Pizza Margherita G</span></span>
-                    <span class="sheet__grid">
-                      <span class="sheet__table">
-                        <span class="sheet__row sheet__row--head"><span>Ingrediente</span><span>Qtd.</span><span>Custo</span></span>
-                        <span class="sheet__row"><span>Massa</span><span>420 g</span><span>2,10</span></span>
-                        <span class="sheet__row"><span>Molho de tomate</span><span>120 g</span><span>1,18</span></span>
-                        <span class="sheet__row"><span>Muçarela</span><span>300 g</span><span>8,40</span></span>
-                        <span class="sheet__row"><span>Tomate</span><span>80 g</span><span>0,72</span></span>
-                        <span class="sheet__row"><span>Manjericão</span><span>5 g</span><span>0,45</span></span>
-                        <span class="sheet__row"><span>Azeite</span><span>10 ml</span><span>0,38</span></span>
-                        <span class="sheet__row"><span>Embalagem</span><span>1 un</span><span>1,59</span></span>
-                        <span class="sheet__row sheet__row--total"><span>Custo total</span><span></span><span>R$ 14,82</span></span>
-                      </span>
-                      <span class="sheet__side">
-                        <span class="sheet__label">CMV do prato</span>
-                        <span class="sheet__big">22,8%</span>
-                        <span class="meter"><span class="meter__fill"></span><span class="meter__goal"></span></span>
-                        <span class="sheet__note">Meta de 30% · dentro</span>
-                        <span class="sheet__kv"><span>Preço de venda</span><b>R$ 64,90</b></span>
-                        <span class="sheet__kv"><span>Margem</span><b>R$ 50,08</b></span>
-                        <span class="sheet__kv"><span>Preço p/ CMV 28%</span><b>R$ 52,93</b></span>
-                      </span>
-                    </span>
-                  </span>
-                </span>
-              </span>
-            </button>
-            <div class="shot__body">
-              <div>
-                <p class="shot__tag mono">Produto DumTech · SaaS</p>
-                <h3 class="shot__title" id="shot-cmv">CMV Pro</h3>
-              </div>
-              <div>
-                <p class="shot__desc">Custo de cardápio para restaurantes: ficha técnica, CMV, precificação, estoque, compras e financeiro no mesmo lugar.</p>
-                <ul class="shot__facts">
-                  <li>17 telas</li><li>Sem framework</li><li>Instala como app</li>
-                </ul>
-                <button class="more" type="button" data-open="cmv">Ver o projeto <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              </div>
-            </div>
-          </article>
-
-          <!-- DUM OS -->
-          <article class="shot" aria-labelledby="shot-dumos">
-            <button class="shot__media" type="button" data-open="dumos" data-cursor="view" aria-label="Abrir o projeto DUM OS">
-              <span class="shot__frame">
-                <img src="assets/dumos-mundo-1440.webp" srcset="assets/dumos-mundo-900.webp 900w, assets/dumos-mundo-1440.webp 1440w" sizes="(min-width: 900px) 70vw, 100vw" width="1440" height="900" loading="lazy" decoding="async" alt="">
-              </span>
-            </button>
-            <div class="shot__body">
-              <div>
-                <p class="shot__tag mono">Ferramenta pessoal · IA</p>
-                <h3 class="shot__title" id="shot-dumos">DUM OS</h3>
-              </div>
-              <div>
-                <p class="shot__desc">Minha central de trabalho: cada empresa é uma ilha 3D, cada projeto uma construção — e o Claude executa as tarefas da fila enquanto eu acompanho.</p>
-                <ul class="shot__facts">
-                  <li>Mundo 3D</li><li>Fila de tarefas com IA</li><li>PySide6 + three.js</li>
-                </ul>
-                <button class="more" type="button" data-open="dumos">Ver o projeto <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              </div>
-            </div>
-          </article>
-
-          <!-- AuditSync -->
-          <article class="shot" aria-labelledby="shot-audit">
-            <button class="shot__media" type="button" data-open="auditsync" data-cursor="view" aria-label="Abrir o projeto AuditSync">
-              <span class="shot__frame">
-                <span class="art art--audit" aria-hidden="true">
-                  <span class="win">
-                    <span class="win__bar"><i></i><i></i><i></i><span>AuditSync — conferência de termos</span></span>
-                    <span class="win__stats">
-                      <span><b>1.070</b>termos lidos</span>
-                      <span><b>4</b>bases cruzadas</span>
-                      <span><b>5 min</b>do PDF ao relatório</span>
-                    </span>
-                    <span class="win__table">
-                      <span class="win__row win__row--head"><span>Termo</span><span>Colaborador</span><span>Equipamento</span><span>Resultado</span></span>
-                      <span class="win__row"><span>0412</span><span>Matr. 10234</span><span>NB-5440 · série 7HX2Q</span><span class="ok">Confere</span></span>
-                      <span class="win__row"><span>0413</span><span>Matr. 10871</span><span>NB-5440 · série 9KD1M</span><span class="ok">Confere</span></span>
-                      <span class="win__row is-diff"><span>0414</span><span>Matr. 11206</span><span>MON-24 · série 3CQ81</span><span>Base diz 3CQ18 → corrigir?</span></span>
-                      <span class="win__row"><span>0415</span><span>Matr. 10045</span><span>NB-7420 · série 2BW5T</span><span class="ok">Confere</span></span>
-                      <span class="win__row is-warn"><span>0416</span><span>Matr. 12310</span><span>HEADSET · patr. 00981</span><span>Matrícula sem cadastro ativo</span></span>
-                      <span class="win__row"><span>0417</span><span>Matr. 10992</span><span>NB-5440 · série 6PL0R</span><span class="ok">Confere</span></span>
-                    </span>
-                  </span>
-                </span>
-              </span>
-            </button>
-            <div class="shot__body">
-              <div>
-                <p class="shot__tag mono">Automação · 2025</p>
-                <h3 class="shot__title" id="shot-audit">AuditSync</h3>
-              </div>
-              <div>
-                <p class="shot__desc">Conferência de termos de equipamentos contra quatro bases internas. O que era feito à mão virou um relatório de divergências.</p>
-                <ul class="shot__facts">
-                  <li>1.070 termos</li><li>4 bases</li><li>5 minutos</li>
-                </ul>
-                <button class="more" type="button" data-open="auditsync">Ver o projeto <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              </div>
-            </div>
-          </article>
-
-          <a class="reel__end" href="#arquivo">
-            <span class="mono">Ainda tem mais</span>
-            <span class="reel__end-title">Oito projetos no arquivo</span>
-            <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 5v14m0 0-6-6m6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Arquivo -->
-    <section class="section archive" id="arquivo" data-label="Arquivo" tabindex="-1">
-      <div class="wrap">
-        <header class="sec-head">
-          <p class="eyebrow" data-reveal>Arquivo</p>
-          <h2 class="title" data-reveal="mask">Mais oito projetos</h2>
-          <p class="sec-head__text" data-reveal>Ferramentas internas, trabalhos para clientes e estudos. Abra cada um para ver o que tem por dentro.</p>
-        </header>
-
-        <div class="archive__list">
-          <details class="row" data-reveal>
-            <summary>
-              <span class="row__name">DUM Workspace</span>
-              <span class="row__kind">Produto DumTech · Windows</span>
-              <span class="row__stack">Python · PySide6 · SQLite</span>
-              <span class="row__year">2026</span>
-              <span class="row__icon" aria-hidden="true"></span>
-            </summary>
-            <div class="row__body">
-              <p>Uma camada sobre o Windows que abre no que você estava fazendo: projetos, pastas, recentes, favoritos, busca e limpeza no mesmo lugar. O sistema de arquivos é a fonte da verdade; o banco guarda só a inteligência por cima dele.</p>
-              <ul>
-                <li>141 testes automatizados e um autoteste de 17 checagens dentro do próprio executável.</li>
-                <li>Ferramenta própria que mede a maior pausa da interface a cada versão.</li>
-                <li>Instalador para Windows e temas claro e escuro.</li>
-              </ul>
-            </div>
-          </details>
-
-          <details class="row" data-reveal>
-            <summary>
-              <span class="row__name">PrintAgent</span>
-              <span class="row__kind">Ferramenta · impressão</span>
-              <span class="row__stack">Go · WebSocket · ESC/POS</span>
-              <span class="row__year">2026</span>
-              <span class="row__icon" aria-hidden="true"></span>
-            </summary>
-            <div class="row__body">
-              <p>Agente para Windows que recebe os pedidos da loja por WebSocket e imprime na térmica da cozinha. É a ponta final do delivery da pizzaria.</p>
-              <ul>
-                <li>Modo simulação: decodifica os bytes ESC/POS e mostra a nota na tela — dá para testar sem impressora.</li>
-                <li>Exporta a nota simulada em TXT, PDF e PNG.</li>
-                <li>Binário único, sem dependências externas.</li>
-              </ul>
-            </div>
-          </details>
-
-          <details class="row" data-reveal>
-            <summary>
-              <span class="row__name">DTCC</span>
-              <span class="row__kind">Sistema interno da DumTech</span>
-              <span class="row__stack">TypeScript · Vite · Supabase</span>
-              <span class="row__year">2026</span>
-              <span class="row__icon" aria-hidden="true"></span>
-            </summary>
-            <div class="row__body">
-              <p>O sistema interno da DumTech, sem framework: um micro-kernel próprio (sinais reativos, roteador, cache) e um motor que gera as telas de cadastro a partir de uma definição — busca, filtros, paginação e validação incluídos.</p>
-              <ul>
-                <li>Cofre com criptografia no navegador (Argon2id + AES-256-GCM): o servidor nunca vê a senha.</li>
-                <li>Multiempresa desde o primeiro dia, com Row Level Security no Postgres.</li>
-              </ul>
-            </div>
-          </details>
-
-          <details class="row" data-reveal>
-            <summary>
-              <span class="row__name">DTAC</span>
-              <span class="row__kind">Ferramenta pessoal</span>
-              <span class="row__stack">JavaScript · Supabase</span>
-              <span class="row__year">2026</span>
-              <span class="row__icon" aria-hidden="true"></span>
-            </summary>
-            <div class="row__body">
-              <p>Painel pessoal com monitor de sites, cofre de senhas, vendas, tarefas em Kanban e vencimentos de domínio e hospedagem.</p>
-              <ul>
-                <li>Cofre zero-knowledge: senha-mestra separada do login, PBKDF2 com 210 mil iterações e AES-GCM no navegador.</li>
-                <li>Row Level Security por usuário em todas as tabelas.</li>
-              </ul>
-            </div>
-          </details>
-
-          <details class="row" data-reveal>
-            <summary>
-              <span class="row__name">Landing com editor</span>
-              <span class="row__kind">Cliente · cosméticos</span>
-              <span class="row__stack">JavaScript · Supabase · Meta Pixel</span>
-              <span class="row__year">2026</span>
-              <span class="row__icon" aria-hidden="true"></span>
-            </summary>
-            <div class="row__body">
-              <p>Página de venda de um produto de skincare com editor por blocos no próprio site: quem cuida da loja troca textos, fotos e links de checkout sem mexer em código.</p>
-              <ul>
-                <li>Editor por blocos em vez de arrastar e soltar livre — o site não quebra na mão de quem não é designer.</li>
-                <li>Rascunho e versões publicadas guardados no Supabase.</li>
-                <li>Pixel da Meta configurado para medir campanhas.</li>
-              </ul>
-            </div>
-          </details>
-
-          <details class="row" data-reveal>
-            <summary>
-              <span class="row__name">FinanceSolux</span>
-              <span class="row__kind">Produto · finanças</span>
-              <span class="row__stack">JavaScript · Tailwind · Supabase</span>
-              <span class="row__year">2025</span>
-              <span class="row__icon" aria-hidden="true"></span>
-            </summary>
-            <div class="row__body">
-              <p>Controle financeiro com painéis, receitas e despesas, recorrências e relatórios automáticos. Em 2026 ganhou um redesenho completo com foco em velocidade.</p>
-              <ul>
-                <li>Salva com confirmação do servidor, sem recarregar a tela.</li>
-                <li>Fontes e bibliotecas servidas pelo próprio site, sem depender de CDN.</li>
-              </ul>
-            </div>
-          </details>
-
-          <details class="row" data-reveal>
-            <summary>
-              <span class="row__name">MyNexora</span>
-              <span class="row__kind">Conceito · 3D</span>
-              <span class="row__stack">Three.js · Next.js · TypeScript</span>
-              <span class="row__year">2025</span>
-              <span class="row__icon" aria-hidden="true"></span>
-            </summary>
-            <div class="row__body">
-              <p>Shopping virtual em 3D: lojas montam e personalizam seus estandes e vendem dentro de um ambiente que você percorre como se fosse um espaço físico.</p>
-              <ul>
-                <li>Em desenvolvimento.</li>
-                <li>Three.js / WebGL, Next.js, TypeScript, Tailwind CSS, Supabase e APIs de pagamento.</li>
-              </ul>
-            </div>
-          </details>
-
-          <details class="row" data-reveal>
-            <summary>
-              <span class="row__name">ParkEase</span>
-              <span class="row__kind">Desktop · estacionamento</span>
-              <span class="row__stack">Python · PyQt5</span>
-              <span class="row__year">2025</span>
-              <span class="row__icon" aria-hidden="true"></span>
-            </summary>
-            <div class="row__body">
-              <p>Controle de estacionamento: vagas, entradas e saídas de veículos, pensado para operação rápida no guichê.</p>
-              <ul>
-                <li>Em desenvolvimento.</li>
-              </ul>
-            </div>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- Trajetória -->
-    <section class="section path" id="trajetoria" data-label="Trajetória" tabindex="-1">
-      <div class="wrap">
-        <header class="sec-head">
-          <p class="eyebrow" data-reveal>Trajetória</p>
-          <h2 class="title" data-reveal="mask">Cada trabalho virou ferramenta.</h2>
-          <p class="sec-head__text" data-reveal>Não comecei programando. Comecei conferindo, medindo e entregando — e é isso que eu ainda faço, agora com código.</p>
-        </header>
-
-        <ol class="path__list">
-          <li class="step" data-reveal>
-            <p class="step__year">2018 <span>→ 2019</span></p>
-            <div class="step__body">
-              <h3 class="step__role">Auditor fiscal <span>brMalls</span></h3>
-              <p>Auditoria de faturamento e notas fiscais, conformidade tributária e contratual, relatórios para decisões da diretoria.</p>
-              <p class="step__kept"><span class="mono">Ficou</span>O olho para a divergência que ninguém vê.</p>
-            </div>
-          </li>
-          <li class="step" data-reveal>
-            <p class="step__year">2019 <span>→ 2022</span></p>
-            <div class="step__body">
-              <h3 class="step__role">Análise e Desenvolvimento de Sistemas <span>Anhanguera · graduação</span></h3>
-              <p>Lógica, banco de dados, engenharia de software — e os primeiros sistemas de verdade.</p>
-              <p class="step__kept"><span class="mono">Ficou</span>A base para tudo o que veio depois.</p>
-            </div>
-          </li>
-          <li class="step" data-reveal>
-            <p class="step__year">2020 <span>→ 2023</span></p>
-            <div class="step__body">
-              <h3 class="step__role">Projetista de móveis e gerente de marcenaria <span>FMB Móveis Planejados</span></h3>
-              <p>Projetos 3D no Promob, detalhamento técnico, apresentação ao cliente, estoque, cronograma e uma equipe de seis pessoas.</p>
-              <p class="step__kept"><span class="mono">Ficou</span>Projetar sob medida e entregar no prazo.</p>
-            </div>
-          </li>
-          <li class="step" data-reveal>
-            <p class="step__year">2023 <span>→ hoje</span></p>
-            <div class="step__body">
-              <h3 class="step__role">Analista de suporte N2 · gestão de ativos <span>Stefanini / Volkswagen Financial Services</span></h3>
-              <p>Relatórios com SQL e Excel avançado, inventário de hardware e software, escalonamentos com o N3 e documentação de incidentes.</p>
-              <p class="step__kept"><span class="mono">Ficou</span>Sistemas corporativos por dentro — e o AuditSync.</p>
-            </div>
-          </li>
-          <li class="step" data-reveal>
-            <p class="step__year">2023 <span>→ hoje</span></p>
-            <div class="step__body">
-              <h3 class="step__role">Dev full-stack e fundador <span>DumTech</span></h3>
-              <p>Produtos próprios para pequenos negócios e sistemas sob encomenda, do banco de dados ao instalador.</p>
-              <p class="step__kept"><span class="mono">Ficou</span>Tudo o que veio antes, no mesmo lugar.</p>
-            </div>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- Ficha técnica -->
-    <section class="section credits" id="ficha" data-label="Ficha técnica" tabindex="-1">
-      <div class="wrap">
-        <header class="sec-head sec-head--center">
-          <p class="eyebrow" data-reveal>Ficha técnica</p>
-          <h2 class="title" data-reveal="mask">Com o que eu construo</h2>
-        </header>
-
-        <dl class="credits__list">
-          <div class="credit" data-reveal><dt>Interface</dt><dd>HTML · CSS · JavaScript · TypeScript · React · Next.js · Tailwind CSS</dd></div>
-          <div class="credit" data-reveal><dt>Banco de dados</dt><dd>PostgreSQL · Supabase · SQLite · SQL</dd></div>
-          <div class="credit" data-reveal><dt>Servidor</dt><dd>Edge Functions · Node.js · APIs REST · Realtime · Web Push</dd></div>
-          <div class="credit" data-reveal><dt>Desktop</dt><dd>Python · PySide6 / Qt · Go · PyInstaller</dd></div>
-          <div class="credit" data-reveal><dt>3D</dt><dd>three.js · WebGL</dd></div>
-          <div class="credit" data-reveal><dt>Pagamentos</dt><dd>Pix · e-Rede · InfinitePay</dd></div>
-          <div class="credit" data-reveal><dt>Segurança</dt><dd>Row Level Security · AES-GCM · Argon2id · Ed25519</dd></div>
-          <div class="credit" data-reveal><dt>Qualidade</dt><dd>Testes automatizados · Playwright · Git · GitHub</dd></div>
-          <div class="credit" data-reveal><dt>IA no fluxo</dt><dd>Claude Code · agentes · automação</dd></div>
-          <div class="credit credit--lead" data-reveal><dt>Direção, roteiro e código</dt><dd>Eric Oliveira</dd></div>
-        </dl>
-      </div>
-    </section>
-
-    <!-- Contato -->
-    <section class="contact" id="contato" data-label="Contato" data-scene="accent" tabindex="-1">
-      <div class="wrap contact__grid">
-        <div class="contact__lead">
-          <p class="eyebrow" data-reveal>Contato</p>
-          <h2 class="contact__title" data-reveal="mask">Vamos construir o próximo?</h2>
-          <p class="contact__text" data-reveal>Tem um sistema para tirar do papel ou uma vaga para preencher? Me conte o que você precisa. Respondo por e&#8209;mail.</p>
-
-          <div class="contact__mail" data-reveal>
-            <a class="mail" href="mailto:ericdudu1999@gmail.com">ericdudu1999@gmail.com</a>
-            <button class="copy" type="button" data-copy="ericdudu1999@gmail.com">Copiar</button>
-            <span class="sr-only" id="copy-status" role="status"></span>
+      <div class="deck" id="deck" aria-label="Projetos em destaque">
+        <article class="proj" data-anchor="desk" data-sec="projetos" data-label="DumTech Hub · 01/05" data-form="hub" data-caption="7 torres = 7 módulos · núcleo laranja = licença" data-sheet="hub">
+          <div class="proj__in">
+            <p class="proj__idx"><b>01</b><span>/05</span><em>Produto DumTech · Windows</em></p>
+            <h3 class="proj__name">DumTech Hub</h3>
+            <p class="proj__lead">Sete sistemas de gestão num só aplicativo: estoque, balcão, financeiro, orçamentos, ordens de serviço, agenda e clientes. Funciona sem internet.</p>
+            <dl class="report">
+              <div><dt>Status</dt><dd><i class="led"></i>À venda</dd></div>
+              <div><dt>Validação</dt><dd>500+ testes automatizados</dd></div>
+              <div><dt>Stack</dt><dd>Python · PySide6 · SQLite · Supabase</dd></div>
+            </dl>
+            <button class="btn btn--line" type="button" data-open="hub">Abrir ficha <span aria-hidden="true">↗</span></button>
           </div>
+        </article>
 
-          <ul class="contact__links" data-reveal>
+        <article class="proj" data-anchor="desk" data-sec="projetos" data-label="Delivery de pizzaria · 02/05" data-form="delivery" data-caption="Disco = área de entrega · pino = loja · fora do raio, o pedido não fecha" data-sheet="delivery">
+          <div class="proj__in">
+            <p class="proj__idx"><b>02</b><span>/05</span><em>Cliente · em produção</em></p>
+            <h3 class="proj__name">Delivery de pizzaria</h3>
+            <p class="proj__lead">Loja online, painel do restaurante e impressão automática na cozinha. O pedido chega pago, sai impresso e o cliente acompanha pelo celular.</p>
+            <dl class="report">
+              <div><dt>Status</dt><dd><i class="led"></i>Em produção · 8ª versão</dd></div>
+              <div><dt>Validação</dt><dd>Pedido só entra no banco depois de pago</dd></div>
+              <div><dt>Stack</dt><dd>JavaScript · Supabase · Go · ESC/POS</dd></div>
+            </dl>
+            <button class="btn btn--line" type="button" data-open="delivery">Abrir ficha <span aria-hidden="true">↗</span></button>
+          </div>
+        </article>
+
+        <article class="proj" data-anchor="desk" data-sec="projetos" data-label="CMV Pro · 03/05" data-form="cmv" data-caption="Bloco = preço do prato (R$ 64,90) · laranja = custo, 22,8%" data-sheet="cmv">
+          <div class="proj__in">
+            <p class="proj__idx"><b>03</b><span>/05</span><em>Produto DumTech · SaaS</em></p>
+            <h3 class="proj__name">CMV Pro</h3>
+            <p class="proj__lead">Custo de cardápio para restaurantes: ficha técnica, CMV, precificação, estoque, compras e financeiro no mesmo lugar.</p>
+            <dl class="report">
+              <div><dt>Status</dt><dd><i class="led led--build"></i>Em construção · 17 telas</dd></div>
+              <div><dt>Validação</dt><dd>Motor de cálculo isolado da interface</dd></div>
+              <div><dt>Stack</dt><dd>JavaScript · ES Modules · Supabase · PWA</dd></div>
+            </dl>
+            <button class="btn btn--line" type="button" data-open="cmv">Abrir ficha <span aria-hidden="true">↗</span></button>
+          </div>
+        </article>
+
+        <article class="proj" data-anchor="desk" data-sec="projetos" data-label="DUM OS · 04/05" data-form="dumos" data-caption="Ilhas = empresas · prédios = projetos · laranja = obra em andamento" data-sheet="dumos">
+          <div class="proj__in">
+            <p class="proj__idx"><b>04</b><span>/05</span><em>Ferramenta pessoal · IA</em></p>
+            <h3 class="proj__name">DUM OS</h3>
+            <p class="proj__lead">Minha central de trabalho: cada empresa é uma ilha 3D, cada projeto uma construção, e uma fila manda tarefas para o Claude enquanto eu acompanho.</p>
+            <dl class="report">
+              <div><dt>Status</dt><dd><i class="led"></i>Uso diário</dd></div>
+              <div><dt>Validação</dt><dd>Uma tarefa por vez, nada roda sem aprovação</dd></div>
+              <div><dt>Stack</dt><dd>Python · PySide6 · three.js · SQLite</dd></div>
+            </dl>
+            <button class="btn btn--line" type="button" data-open="dumos">Abrir ficha <span aria-hidden="true">↗</span></button>
+          </div>
+        </article>
+
+        <article class="proj" data-anchor="desk" data-sec="projetos" data-label="AuditSync · 05/05" data-form="auditsync" data-caption="1.070 blocos = 1.070 termos · laranja = divergência · 4 colunas = 4 bases" data-sheet="auditsync">
+          <div class="proj__in">
+            <p class="proj__idx"><b>05</b><span>/05</span><em>Automação · 2025</em></p>
+            <h3 class="proj__name">AuditSync</h3>
+            <p class="proj__lead">Conferência de termos de equipamentos contra quatro bases internas. O que era feito à mão virou um relatório de divergências.</p>
+            <dl class="report">
+              <div><dt>Status</dt><dd><i class="led"></i>Ferramenta interna</dd></div>
+              <div><dt>Validação</dt><dd>1.070 termos conferidos em 5 minutos</dd></div>
+              <div><dt>Stack</dt><dd>Python · Tkinter · difflib</dd></div>
+            </dl>
+            <button class="btn btn--line" type="button" data-open="auditsync">Abrir ficha <span aria-hidden="true">↗</span></button>
+          </div>
+        </article>
+      </div>
+
+      <div class="deck-ctrl">
+        <button class="deck-btn" type="button" data-deck="prev" aria-label="Projeto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <p class="deck-count" aria-live="polite"><b id="deckNow">01</b> / 05</p>
+        <div class="deck-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <button class="deck-btn" type="button" data-deck="next" aria-label="Próximo projeto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </section>
+
+    <!-- ============ MAIS BUILDS ============ -->
+    <section class="more wrap" id="mais" data-anchor data-sec="projetos" data-label="Mais builds" data-form="field" data-caption="Seis prédios = seis builds · aponte uma linha para acender o dela">
+      <header class="head">
+        <p class="eyebrow">Arquivo</p>
+        <h2 class="h2" data-reveal><span>Mais seis builds.</span></h2>
+        <p class="lead">Ferramentas internas, trabalho para cliente e produtos menores — cada um com o que garante que ele funciona.</p>
+      </header>
+      <ul class="rows">
+        <li><button class="row" type="button" data-open="workspace" data-group="0">
+          <span class="row__name">DUM Workspace</span>
+          <span class="row__type">Produto DumTech · Windows</span>
+          <span class="row__proof">141 testes + autoteste no .exe</span>
+          <span class="row__year">2026</span>
+          <span class="row__go" aria-hidden="true">↗</span>
+        </button></li>
+        <li><button class="row" type="button" data-open="printagent" data-group="1">
+          <span class="row__name">PrintAgent</span>
+          <span class="row__type">Agente de impressão · Go</span>
+          <span class="row__proof">Modo simulação, sem impressora</span>
+          <span class="row__year">2026</span>
+          <span class="row__go" aria-hidden="true">↗</span>
+        </button></li>
+        <li><button class="row" type="button" data-open="dtcc" data-group="2">
+          <span class="row__name">DTCC</span>
+          <span class="row__type">Sistema interno · TypeScript</span>
+          <span class="row__proof">RLS multiempresa + cofre Argon2id</span>
+          <span class="row__year">2026</span>
+          <span class="row__go" aria-hidden="true">↗</span>
+        </button></li>
+        <li><button class="row" type="button" data-open="dtac" data-group="3">
+          <span class="row__name">DTAC</span>
+          <span class="row__type">Painel pessoal · Supabase</span>
+          <span class="row__proof">Cofre zero-knowledge</span>
+          <span class="row__year">2026</span>
+          <span class="row__go" aria-hidden="true">↗</span>
+        </button></li>
+        <li><button class="row" type="button" data-open="landing" data-group="4">
+          <span class="row__name">Landing com editor</span>
+          <span class="row__type">Cliente · cosméticos</span>
+          <span class="row__proof">Editor que não quebra o layout</span>
+          <span class="row__year">2026</span>
+          <span class="row__go" aria-hidden="true">↗</span>
+        </button></li>
+        <li><button class="row" type="button" data-open="financesolux" data-group="5">
+          <span class="row__name">FinanceSolux</span>
+          <span class="row__type">Produto · finanças</span>
+          <span class="row__proof">Bancada com Supabase falso</span>
+          <span class="row__year">2025</span>
+          <span class="row__go" aria-hidden="true">↗</span>
+        </button></li>
+      </ul>
+    </section>
+
+    <!-- ============ TESTES ============ -->
+    <section class="tests wrap" id="testes" data-anchor data-sec="testes" data-label="Testes" data-form="vistoria" data-caption="Cada camada acesa = uma verificação que passou">
+      <header class="head">
+        <p class="eyebrow">Vistoria</p>
+        <h2 class="h2" data-reveal><span>Nada sai sem passar no teste.</span></h2>
+        <p class="lead">Teste automatizado onde o erro custa dinheiro, simulação onde o mundo real é caro e rede de segurança no que já está em produção.</p>
+      </header>
+
+      <div class="runner" id="runner">
+        <div class="runner__bar"><span>$ verificar --tudo</span><span class="runner__state" id="runState">pronto</span></div>
+        <ol class="runner__list">
+          <li><span class="tag">PASS</span><b>dumtech-hub</b><span>500+ testes automatizados</span></li>
+          <li><span class="tag">PASS</span><b>dumtech-hub</b><span>licença assinada com Ed25519, presa ao computador</span></li>
+          <li><span class="tag">PASS</span><b>loja</b><span>pagamento conferido na API antes de liberar a licença</span></li>
+          <li><span class="tag">PASS</span><b>dum-workspace</b><span>141 testes + autoteste de 17 checagens no .exe</span></li>
+          <li><span class="tag">PASS</span><b>dum-workspace</b><span>mede a maior pausa da interface a cada versão</span></li>
+          <li><span class="tag">PASS</span><b>delivery</b><span>pedido só entra no banco depois de pago</span></li>
+          <li><span class="tag">PASS</span><b>delivery</b><span>fila no servidor recupera o Pix se a sessão cair</span></li>
+          <li><span class="tag">PASS</span><b>printagent</b><span>modo simulação: confere a nota sem impressora</span></li>
+          <li><span class="tag">PASS</span><b>financesolux</b><span>bancada de testes com um Supabase falso</span></li>
+          <li><span class="tag">PASS</span><b>portfolio</b><span>conferido no navegador com Playwright</span></li>
+        </ol>
+        <div class="runner__foot">
+          <p class="runner__sum" id="runSum">10 verificações · 10 passaram</p>
+          <p class="runner__count"><strong><span data-count="640">640</span>+</strong> testes automatizados no Hub e no Workspace</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CURRÍCULO ============ -->
+    <section class="cv wrap" id="cv" data-anchor data-sec="cv" data-label="Currículo" data-form="cv" data-caption="Um degrau por etapa: formação, suporte N2, DumTech">
+      <header class="head">
+        <p class="eyebrow">Currículo</p>
+        <h2 class="h2" data-reveal><span>Do suporte ao produto.</span></h2>
+        <p class="lead">Formação em Análise e Desenvolvimento de Sistemas, suporte N2 em ambiente corporativo e produtos próprios rodando na mão de clientes.</p>
+        <a class="btn btn--sig" href="CVEricOliveira.pdf" download>Baixar currículo em PDF <span aria-hidden="true">↓</span></a>
+      </header>
+
+      <ol class="jobs">
+        <li class="job" data-group="2">
+          <p class="job__when">2023 → hoje</p>
+          <div class="job__body">
+            <h3 class="job__role">Dev full-stack e fundador</h3>
+            <p class="job__org">DumTech</p>
+            <p>Produtos próprios para pequenos negócios e sistemas sob encomenda, do banco de dados ao instalador.</p>
+            <ul class="ticks">
+              <li>DumTech Hub: 7 módulos, licença assinada e loja com checkout próprio.</li>
+              <li>Delivery de um restaurante em produção, hoje na 8ª versão.</li>
+              <li>Spec, plano e testes antes de cada entrega.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="job" data-group="1">
+          <p class="job__when">out 2023 → hoje</p>
+          <div class="job__body">
+            <h3 class="job__role">Analista de suporte N2 · gestão de ativos</h3>
+            <p class="job__org">Stefanini / Volkswagen Financial Services</p>
+            <p>Relatórios com SQL e Excel avançado, inventário de hardware e software, escalonamentos com o N3 e documentação de incidentes.</p>
+            <ul class="ticks">
+              <li>Criei o AuditSync: 1.070 termos conferidos em 5 minutos.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="job" data-group="0">
+          <p class="job__when">2019 → 2022</p>
+          <div class="job__body">
+            <h3 class="job__role">Análise e Desenvolvimento de Sistemas</h3>
+            <p class="job__org">Anhanguera · graduação</p>
+            <p>Lógica, banco de dados, engenharia de software e os primeiros sistemas de verdade.</p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="cv__grid">
+        <div>
+          <h3 class="h3">Com o que eu construo</h3>
+          <dl class="bom">
+            <div><dt>Interface</dt><dd>HTML · CSS · JavaScript · TypeScript · React · Next.js · Tailwind CSS</dd></div>
+            <div><dt>Dados</dt><dd>PostgreSQL · Supabase · SQLite · SQL</dd></div>
+            <div><dt>Servidor</dt><dd>Edge Functions · Node.js · APIs REST · Realtime · Web Push</dd></div>
+            <div><dt>Desktop</dt><dd>Python · PySide6 / Qt · Go · PyInstaller</dd></div>
+            <div><dt>3D</dt><dd>three.js · WebGL</dd></div>
+            <div><dt>Pagamentos</dt><dd>Pix · e-Rede · InfinitePay</dd></div>
+            <div><dt>Segurança</dt><dd>Row Level Security · AES-GCM · Argon2id · Ed25519</dd></div>
+            <div><dt>Qualidade</dt><dd>Testes automatizados · Playwright · Git · GitHub</dd></div>
+            <div><dt>IA no fluxo</dt><dd>Claude Code · agentes · automação</dd></div>
+          </dl>
+        </div>
+        <div>
+          <h3 class="h3">Cursos</h3>
+          <p class="courses">JavaScript, React, React Native, HTML, CSS, Web Design e C# pela Udemy. Python e SQL pelo LinkedIn Learning.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTATO ============ -->
+    <section class="contact wrap" id="contato" data-anchor data-sec="contato" data-label="Contato" data-form="contato" data-caption="Terreno marcado, material separado">
+      <p class="eyebrow">Contato</p>
+      <h2 class="contact__title" data-reveal><span>Próximo build?</span></h2>
+      <div class="contact__grid">
+        <div class="contact__info">
+          <p class="lead">Vaga, projeto ou conversa sobre código: me escreva. Respondo por e-mail.</p>
+          <div class="mail">
+            <a class="mail__link" href="mailto:ericdudu1999@gmail.com">ericdudu1999@gmail.com</a>
+            <button class="btn btn--sm" type="button" data-copy="ericdudu1999@gmail.com">Copiar</button>
+          </div>
+          <p class="visually-hidden" id="copyStatus" role="status"></p>
+          <ul class="links">
             <li><a href="https://www.linkedin.com/in/eric-oliveira-9703671b5/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></li>
             <li><a href="https://github.com/Eric1Oliveira" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></li>
-            <li><a href="CVEricOliveira.pdf" download="Eric_Oliveira_CV.pdf">Currículo em PDF <span aria-hidden="true">↓</span></a></li>
+            <li><a href="CVEricOliveira.pdf" download>Currículo em PDF <span aria-hidden="true">↓</span></a></li>
           </ul>
         </div>
 
-        <form class="form" id="contactForm" action="https://formspree.io/f/manbpwyv" method="POST" data-reveal>
-          <fieldset class="chips">
+        <form class="form" id="contactForm" action="https://formspree.io/f/manbpwyv" method="POST">
+          <fieldset class="topics">
             <legend>Sobre o que é?</legend>
-            <label class="chip"><input type="radio" name="subject" value="Quero um sistema" checked><span>Quero um sistema</span></label>
-            <label class="chip"><input type="radio" name="subject" value="Tenho uma vaga"><span>Tenho uma vaga</span></label>
-            <label class="chip"><input type="radio" name="subject" value="Outro assunto"><span>Outro assunto</span></label>
+            <label><input type="radio" name="subject" value="Vaga" checked><span>Tenho uma vaga</span></label>
+            <label><input type="radio" name="subject" value="Sistema"><span>Quero um sistema</span></label>
+            <label><input type="radio" name="subject" value="Outro assunto"><span>Outro assunto</span></label>
           </fieldset>
-          <div class="form__row">
-            <div class="field">
-              <label for="name">Nome</label>
-              <input id="name" name="name" type="text" autocomplete="name" required>
-            </div>
-            <div class="field">
-              <label for="email">E-mail</label>
-              <input id="email" name="email" type="email" autocomplete="email" required>
-            </div>
-          </div>
-          <div class="field">
-            <label for="message">Mensagem</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-          </div>
-          <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <div class="form__actions">
-            <button class="btn btn--accent" type="submit" data-magnetic>Enviar mensagem</button>
-            <p class="form__status" role="status" aria-live="polite"></p>
-          </div>
+          <label class="field"><span>Nome</span><input name="name" autocomplete="name" required></label>
+          <label class="field"><span>E-mail</span><input name="email" type="email" autocomplete="email" required></label>
+          <label class="field"><span>Mensagem</span><textarea name="message" rows="4" required></textarea></label>
+          <input class="gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn btn--sig btn--wide" type="submit">Enviar mensagem</button>
+          <p class="form__status" role="status"></p>
         </form>
       </div>
-
-      <footer class="footer wrap">
-        <p>© 2026 Eric Oliveira</p>
-        <p>Fim — por enquanto.</p>
-        <a href="#inicio">Voltar ao início ↑</a>
-      </footer>
     </section>
   </main>
 
-  <!-- Linha do tempo (preenchida pelo main.js) -->
-  <nav class="timeline" aria-label="Linha do tempo da página" hidden>
-    <p class="timeline__now"><span class="timeline__label">Início</span><span class="timeline__time">00:00</span></p>
-    <div class="timeline__track">
-      <ol class="timeline__clips"></ol>
-      <span class="timeline__head" aria-hidden="true"></span>
-    </div>
+  <footer class="foot wrap">
+    <p>© 2026 Eric Oliveira</p>
+    <p>Feito à mão: HTML, CSS, JavaScript e three.js.</p>
+    <a href="#inicio">Voltar ao início <span aria-hidden="true">↑</span></a>
+  </footer>
+
+  <!-- barra de app no celular -->
+  <nav class="tabbar" aria-label="Seções">
+    <a href="#inicio" data-nav="inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/></svg><span>Início</span></a>
+    <a href="#projetos" data-nav="projetos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9"/></svg><span>Projetos</span></a>
+    <a href="#testes" data-nav="testes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM8 12.5l2.8 2.8L16.5 9"/></svg><span>Testes</span></a>
+    <a href="#cv" data-nav="cv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6zM9 10h6M9 14h6M9 18h4"/></svg><span>Currículo</span></a>
+    <a href="#contato" data-nav="contato"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg><span>Contato</span></a>
+    <i class="tabbar__ind" aria-hidden="true"></i>
   </nav>
 
-  <!-- Menu do celular -->
-  <dialog class="menu" id="menu" aria-label="Menu" data-lenis-prevent>
-    <div class="menu__inner">
-      <div class="menu__top">
-        <span class="brand">Eric Oliveira</span>
-        <button class="btn btn--ghost btn--sm" type="button" data-close>Fechar</button>
+  <!-- ficha do projeto: painel lateral no computador, folha que sobe no celular -->
+  <dialog class="sheet" id="sheet" aria-labelledby="sheetTitle">
+    <div class="sheet__scrim" data-close></div>
+    <div class="sheet__panel" data-lenis-prevent>
+      <div class="sheet__top">
+        <span class="sheet__grab" aria-hidden="true"></span>
+        <button class="sheet__x" type="button" data-close aria-label="Fechar ficha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
       </div>
-      <nav class="menu__nav" aria-label="Seções">
-        <a href="#projetos">Projetos</a>
-        <a href="#arquivo">Arquivo</a>
-        <a href="#trajetoria">Trajetória</a>
-        <a href="#ficha">Ficha técnica</a>
-        <a href="#contato">Contato</a>
-      </nav>
-      <div class="menu__foot">
-        <a href="mailto:ericdudu1999@gmail.com">ericdudu1999@gmail.com</a>
-        <a href="CVEricOliveira.pdf" download="Eric_Oliveira_CV.pdf">Baixar currículo (PDF)</a>
-      </div>
+      <div class="sheet__body" id="sheetBody"></div>
     </div>
   </dialog>
 
-  <!-- Ficha de cada projeto -->
-  <dialog class="case" id="case" aria-labelledby="case-title" data-lenis-prevent>
-    <button class="case__close" type="button" data-close aria-label="Fechar">
-      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
-    </button>
-    <div class="case__body"></div>
-  </dialog>
-
-  <template id="case-hub">
-    <header class="case__head">
-      <p class="eyebrow">Produto DumTech · 2026</p>
-      <h2 class="case__title" id="case-title">DumTech Hub</h2>
-      <p class="case__lede">Sete sistemas de gestão num só aplicativo para Windows. Cada módulo é vendido separado e aparece no Hub conforme a licença do cliente.</p>
-    </header>
-    <figure class="case__figure">
-      <img src="assets/hub-inicio-1600.webp" width="1600" height="1000" alt="Tela inicial do DumTech Hub com os números do dia e os avisos de cada módulo.">
+  <!-- ============ FICHAS ============ -->
+  <template id="t-hub">
+    <p class="eyebrow">Produto DumTech · Windows · 2026</p>
+    <h2 class="sheet__title" id="sheetTitle">DumTech Hub</h2>
+    <p class="sheet__lead">Sete sistemas de gestão num só aplicativo para Windows. Cada módulo é vendido separado e aparece no Hub conforme a licença do cliente.</p>
+    <dl class="report">
+      <div><dt>Status</dt><dd><i class="led"></i>À venda</dd></div>
+      <div><dt>Validação</dt><dd>500+ testes automatizados</dd></div>
+      <div><dt>Roda em</dt><dd>Windows, sem internet</dd></div>
+    </dl>
+    <figure class="shot">
+      <img src="assets/hub-inicio-1600.webp" srcset="assets/hub-inicio-900.webp 900w, assets/hub-inicio-1600.webp 1600w" sizes="(max-width: 820px) 100vw, 600px" width="1600" height="1000" alt="Tela inicial do DumTech Hub com os módulos liberados pela licença" loading="lazy" decoding="async">
+      <figcaption>Tela inicial: os módulos aparecem conforme a licença.</figcaption>
     </figure>
-    <div class="case__cols">
-      <section>
-        <h3>O que faz</h3>
-        <ul>
-          <li>Estoque com custo médio, código de barras, contagem e venda fracionada (1,5 kg).</li>
-          <li>Balcão de vendas com caixa do dia, devolução e fechamento.</li>
-          <li>Financeiro, orçamentos, ordens de serviço, agenda e clientes conversando entre si.</li>
-          <li>Funciona sem internet: os dados ficam no computador do cliente.</li>
-        </ul>
-      </section>
-      <section>
-        <h3>Por baixo</h3>
-        <ul>
-          <li>Licença assinada com Ed25519 e presa ao computador — copiar o arquivo não libera outra máquina.</li>
-          <li>Loja própria com checkout InfinitePay: o pagamento é conferido na API antes de a licença ser entregue.</li>
-          <li>Mais de 500 testes automatizados e instalador gerado com PyInstaller.</li>
-        </ul>
-      </section>
-    </div>
-    <figure class="case__figure">
-      <img src="assets/hub-balcao-1600.webp" width="1600" height="1000" loading="lazy" alt="Balcão de vendas do DumTech Hub com itens bipados, desconto e total da venda.">
+    <figure class="shot">
+      <img src="assets/hub-balcao-1600.webp" srcset="assets/hub-balcao-900.webp 900w, assets/hub-balcao-1600.webp 1600w" sizes="(max-width: 820px) 100vw, 600px" width="1600" height="1000" alt="Balcão de vendas do DumTech Hub" loading="lazy" decoding="async">
+      <figcaption>Balcão de vendas com caixa do dia.</figcaption>
     </figure>
-    <footer class="case__foot">
-      <p class="case__stack">Python · PySide6 · SQLite · Supabase · Edge Functions · InfinitePay</p>
-      <a class="btn btn--accent" href="https://dumtech-hub.netlify.app" target="_blank" rel="noopener">Conhecer o DumTech Hub <span aria-hidden="true">↗</span></a>
-    </footer>
+    <section class="sheet__sec">
+      <h3 class="h3">O que faz</h3>
+      <ul class="ticks">
+        <li>Estoque com custo médio, código de barras, contagem e venda fracionada (1,5 kg).</li>
+        <li>Balcão de vendas com caixa do dia, devolução e fechamento.</li>
+        <li>Financeiro, orçamentos, ordens de serviço, agenda e clientes conversando entre si.</li>
+        <li>Funciona sem internet: os dados ficam no computador do cliente.</li>
+      </ul>
+    </section>
+    <section class="sheet__sec">
+      <h3 class="h3">Por dentro</h3>
+      <ul class="ticks">
+        <li>Licença assinada com Ed25519 e presa ao computador — copiar o arquivo não libera outra máquina.</li>
+        <li>Loja própria com checkout InfinitePay: o pagamento é conferido na API antes de a licença ser entregue.</li>
+        <li>Mais de 500 testes automatizados e instalador gerado com PyInstaller.</li>
+      </ul>
+    </section>
+    <p class="chips"><span>Python</span><span>PySide6</span><span>SQLite</span><span>Supabase</span><span>Edge Functions</span><span>InfinitePay</span></p>
+    <a class="btn btn--sig" href="https://dumtech-hub.netlify.app" target="_blank" rel="noopener">Conhecer o DumTech Hub <span aria-hidden="true">↗</span></a>
   </template>
 
-  <template id="case-delivery">
-    <header class="case__head">
-      <p class="eyebrow">Cliente · em produção</p>
-      <h2 class="case__title" id="case-title">Delivery de pizzaria</h2>
-      <p class="case__lede">Loja online, painel do restaurante e impressão automática na cozinha. Entreguei a primeira versão e sigo evoluindo o sistema com o cliente — hoje ele está na oitava versão.</p>
-    </header>
-    <div class="case__cols">
-      <section>
-        <h3>O que faz</h3>
-        <ul>
-          <li>Cardápio com adicionais, carrinho e pagamento online integrado à e-Rede (Itaú), com Pix.</li>
-          <li>Painel do restaurante com som de novo pedido, fluxo de status por canal (entrega, retirada, mesa) e relatórios por turno.</li>
-          <li>O cliente confirma o endereço num pino no mapa; fora da área de entrega, o pedido não fecha.</li>
-          <li>Avisos no celular quando o pedido é confirmado, vai para o forno e sai para entrega.</li>
-        </ul>
-      </section>
-      <section>
-        <h3>Por baixo</h3>
-        <ul>
-          <li>O pedido só entra no banco depois de pago — a cozinha nunca recebe pedido fantasma.</li>
-          <li>Um gatilho no Postgres avisa uma Edge Function, que monta a nota em ESC/POS e envia por WebSocket a um agente em Go ligado à impressora térmica.</li>
-          <li>Distância calculada no elipsoide WGS84, com erro de milímetros, e frete por faixa de quilômetro.</li>
-          <li>Fila no servidor e alerta no painel recuperam pagamentos Pix se a sessão do celular cair no meio do caminho.</li>
-        </ul>
-      </section>
+  <template id="t-delivery">
+    <p class="eyebrow">Cliente · em produção</p>
+    <h2 class="sheet__title" id="sheetTitle">Delivery de pizzaria</h2>
+    <p class="sheet__lead">Loja online, painel do restaurante e impressão automática na cozinha. Entreguei a primeira versão e sigo evoluindo o sistema com o cliente — hoje ele está na oitava.</p>
+    <dl class="report">
+      <div><dt>Status</dt><dd><i class="led"></i>Em produção · 8ª versão</dd></div>
+      <div><dt>Validação</dt><dd>Pedido só entra no banco depois de pago</dd></div>
+      <div><dt>Pagamento</dt><dd>e-Rede (Itaú) com Pix</dd></div>
+    </dl>
+    <div class="ticket">
+      <pre class="receipt" aria-label="Exemplo de nota impressa na cozinha">PEDIDO #1287     ENTREGA · 19:42
+--------------------------------
+1x PIZZA MARGHERITA G      64,90
+   + borda catupiry         8,00
+1x PIZZA CALABRESA M       49,90
+1x REFRIGERANTE 2L         14,00
+FRETE · 3,2 KM              9,00
+--------------------------------
+TOTAL                  R$ 145,80
+PAGO · PIX</pre>
+      <ol class="timeline">
+        <li><time>19:42</time>Pagamento confirmado</li>
+        <li><time>19:42</time>Nota impressa na cozinha</li>
+        <li><time>19:51</time>Cliente avisado: no forno</li>
+        <li><time>20:13</time>Saiu para entrega</li>
+      </ol>
     </div>
-    <footer class="case__foot">
-      <p class="case__stack">JavaScript · Supabase (Postgres, Realtime, Edge Functions) · Go · ESC/POS · Web Push · Leaflet · e-Rede</p>
-      <p class="case__note">Projeto de cliente: nome e endereço ficam de fora.</p>
-    </footer>
+    <section class="sheet__sec">
+      <h3 class="h3">O que faz</h3>
+      <ul class="ticks">
+        <li>Cardápio com adicionais, carrinho e pagamento online integrado à e-Rede (Itaú), com Pix.</li>
+        <li>Painel do restaurante com som de novo pedido, fluxo de status por canal (entrega, retirada, mesa) e relatórios por turno.</li>
+        <li>O cliente confirma o endereço num pino no mapa; fora da área de entrega, o pedido não fecha.</li>
+        <li>Avisos no celular quando o pedido é confirmado, vai para o forno e sai para entrega.</li>
+      </ul>
+    </section>
+    <section class="sheet__sec">
+      <h3 class="h3">Por dentro</h3>
+      <ul class="ticks">
+        <li>O pedido só entra no banco depois de pago — a cozinha nunca recebe pedido fantasma.</li>
+        <li>Um gatilho no Postgres avisa uma Edge Function, que monta a nota em ESC/POS e envia por WebSocket a um agente em Go ligado à impressora térmica.</li>
+        <li>Distância calculada no elipsoide WGS84 e frete por faixa de quilômetro.</li>
+        <li>Fila no servidor e alerta no painel recuperam pagamentos Pix se a sessão do celular cair no meio do caminho.</li>
+      </ul>
+    </section>
+    <p class="chips"><span>JavaScript</span><span>Supabase</span><span>Postgres</span><span>Realtime</span><span>Edge Functions</span><span>Go</span><span>ESC/POS</span><span>Web Push</span><span>Leaflet</span><span>e-Rede</span></p>
+    <p class="note">Projeto de cliente: nome e endereço ficam de fora.</p>
   </template>
 
-  <template id="case-cmv">
-    <header class="case__head">
-      <p class="eyebrow">Produto DumTech · SaaS</p>
-      <h2 class="case__title" id="case-title">CMV Pro</h2>
-      <p class="case__lede">Gestão de custo para restaurantes: ficha técnica, CMV, precificação, estoque, compras e financeiro — com a conta certa do custo de cada prato.</p>
-    </header>
-    <div class="case__cols">
-      <section>
-        <h3>O que faz</h3>
-        <ul>
-          <li>Ficha técnica com custo por ingrediente e preço sugerido para a meta de CMV.</li>
-          <li>Simulador de preço, estoque e compras, fluxo de caixa com baixa automática das vendas.</li>
-          <li>Relatórios em CSV, Excel e PDF; backup e restauração em JSON.</li>
-        </ul>
-      </section>
-      <section>
-        <h3>Por baixo</h3>
-        <ul>
-          <li>Aplicação de página única sem framework: ES Modules, roteador próprio e 17 telas carregadas sob demanda.</li>
-          <li>Motor de cálculo puro, separado da interface — a mesma conta vale em todas as telas.</li>
-          <li>Camada de dados com contrato único: roda local ou no Supabase sem mudar as telas.</li>
-          <li>Instala como aplicativo (PWA), com service worker.</li>
-        </ul>
-      </section>
+  <template id="t-cmv">
+    <p class="eyebrow">Produto DumTech · SaaS</p>
+    <h2 class="sheet__title" id="sheetTitle">CMV Pro</h2>
+    <p class="sheet__lead">Gestão de custo para restaurantes: ficha técnica, CMV, precificação, estoque, compras e financeiro — com a conta certa do custo de cada prato.</p>
+    <dl class="report">
+      <div><dt>Status</dt><dd><i class="led led--build"></i>Em construção · 17 telas</dd></div>
+      <div><dt>Validação</dt><dd>Motor de cálculo isolado da interface</dd></div>
+      <div><dt>Instala</dt><dd>Como aplicativo (PWA)</dd></div>
+    </dl>
+    <div class="spec">
+      <p class="spec__head">Ficha técnica · Pizza Margherita G</p>
+      <table>
+        <thead><tr><th>Ingrediente</th><th>Qtd.</th><th>Custo</th></tr></thead>
+        <tbody>
+          <tr><td>Massa</td><td>420 g</td><td>2,10</td></tr>
+          <tr><td>Molho de tomate</td><td>120 g</td><td>1,18</td></tr>
+          <tr><td>Muçarela</td><td>300 g</td><td>8,40</td></tr>
+          <tr><td>Tomate</td><td>80 g</td><td>0,72</td></tr>
+          <tr><td>Manjericão</td><td>5 g</td><td>0,45</td></tr>
+          <tr><td>Azeite</td><td>10 ml</td><td>0,38</td></tr>
+          <tr><td>Embalagem</td><td>1 un</td><td>1,59</td></tr>
+        </tbody>
+        <tfoot><tr><td colspan="2">Custo total</td><td>R$ 14,82</td></tr></tfoot>
+      </table>
+      <dl class="spec__kpis">
+        <div><dt>CMV do prato</dt><dd class="hot">22,8%</dd></div>
+        <div><dt>Preço de venda</dt><dd>R$ 64,90</dd></div>
+        <div><dt>Margem</dt><dd>R$ 50,08</dd></div>
+        <div><dt>Preço p/ CMV 28%</dt><dd>R$ 52,93</dd></div>
+      </dl>
     </div>
-    <footer class="case__foot">
-      <p class="case__stack">JavaScript · ES Modules · Supabase · PWA</p>
-    </footer>
+    <section class="sheet__sec">
+      <h3 class="h3">O que faz</h3>
+      <ul class="ticks">
+        <li>Ficha técnica com custo por ingrediente e preço sugerido para a meta de CMV.</li>
+        <li>Simulador de preço, estoque e compras, fluxo de caixa com baixa automática das vendas.</li>
+        <li>Relatórios em CSV, Excel e PDF; backup e restauração em JSON.</li>
+      </ul>
+    </section>
+    <section class="sheet__sec">
+      <h3 class="h3">Por dentro</h3>
+      <ul class="ticks">
+        <li>Aplicação de página única sem framework: ES Modules, roteador próprio e 17 telas carregadas sob demanda.</li>
+        <li>Motor de cálculo puro, separado da interface — a mesma conta vale em todas as telas.</li>
+        <li>Camada de dados com contrato único: roda local ou no Supabase sem mudar as telas.</li>
+        <li>Instala como aplicativo (PWA), com service worker.</li>
+      </ul>
+    </section>
+    <p class="chips"><span>JavaScript</span><span>ES Modules</span><span>Supabase</span><span>PWA</span></p>
   </template>
 
-  <template id="case-dumos">
-    <header class="case__head">
-      <p class="eyebrow">Ferramenta pessoal · IA</p>
-      <h2 class="case__title" id="case-title">DUM OS</h2>
-      <p class="case__lede">Minha central de trabalho. Cada empresa vira uma ilha num mundo 3D, cada projeto uma construção — e uma fila manda tarefas para o Claude enquanto eu acompanho o progresso.</p>
-    </header>
-    <figure class="case__figure">
-      <img src="assets/dumos-mundo-1440.webp" width="1440" height="900" alt="DUM OS: ilhas 3D ao entardecer, uma para cada empresa, com o painel de missões ao lado.">
+  <template id="t-dumos">
+    <p class="eyebrow">Ferramenta pessoal · IA</p>
+    <h2 class="sheet__title" id="sheetTitle">DUM OS</h2>
+    <p class="sheet__lead">Minha central de trabalho. Cada empresa vira uma ilha num mundo 3D, cada projeto uma construção — e uma fila manda tarefas para o Claude enquanto eu acompanho o progresso.</p>
+    <dl class="report">
+      <div><dt>Status</dt><dd><i class="led"></i>Uso diário</dd></div>
+      <div><dt>Validação</dt><dd>Uma tarefa por vez, nada roda sem aprovação</dd></div>
+      <div><dt>Roda em</dt><dd>Windows (PySide6 + QtWebEngine)</dd></div>
+    </dl>
+    <figure class="shot">
+      <img src="assets/dumos-mundo-1440.webp" srcset="assets/dumos-mundo-900.webp 900w, assets/dumos-mundo-1440.webp 1440w" sizes="(max-width: 820px) 100vw, 600px" width="1440" height="900" alt="Mundo 3D do DUM OS com ilhas de empresas e construções de projetos" loading="lazy" decoding="async">
+      <figcaption>O mundo: ilhas, construções e o céu que acompanha a hora.</figcaption>
     </figure>
-    <div class="case__cols">
-      <section>
-        <h3>O que faz</h3>
-        <ul>
-          <li>Mundo 3D com céu que acompanha a hora e o clima.</li>
-          <li>Missões: peço uma tarefa em português, acompanho e aprovo.</li>
-          <li>Busca, widgets e a memória de cada projeto num só lugar.</li>
-        </ul>
-      </section>
-      <section>
-        <h3>Por baixo</h3>
-        <ul>
-          <li>Uma tarefa por vez; se o app fecha no meio, ela volta pausada e nunca roda sozinha de novo.</li>
-          <li>O que o agente aprende entra como memória sugerida e só vale depois de aprovado.</li>
-          <li>Permissões de enviar e editar começam em "perguntar".</li>
-          <li>Interface em HTML, CSS e three.js dentro de um app PySide6 (QtWebEngine).</li>
-        </ul>
-      </section>
-    </div>
-    <footer class="case__foot">
-      <p class="case__stack">Python · PySide6 · QtWebEngine · three.js · SQLite · Claude Code</p>
-    </footer>
+    <section class="sheet__sec">
+      <h3 class="h3">O que faz</h3>
+      <ul class="ticks">
+        <li>Mundo 3D com céu que acompanha a hora e o clima.</li>
+        <li>Missões: peço uma tarefa em português, acompanho e aprovo.</li>
+        <li>Busca, widgets e a memória de cada projeto num só lugar.</li>
+      </ul>
+    </section>
+    <section class="sheet__sec">
+      <h3 class="h3">Por dentro</h3>
+      <ul class="ticks">
+        <li>Uma tarefa por vez; se o app fecha no meio, ela volta pausada e nunca roda sozinha de novo.</li>
+        <li>O que o agente aprende entra como memória sugerida e só vale depois de aprovado.</li>
+        <li>Permissões de enviar e editar começam em "perguntar".</li>
+        <li>Interface em HTML, CSS e three.js dentro de um app PySide6 (QtWebEngine).</li>
+      </ul>
+    </section>
+    <p class="chips"><span>Python</span><span>PySide6</span><span>QtWebEngine</span><span>three.js</span><span>SQLite</span><span>Claude Code</span></p>
   </template>
 
-  <template id="case-auditsync">
-    <header class="case__head">
-      <p class="eyebrow">Automação · 2025</p>
-      <h2 class="case__title" id="case-title">AuditSync</h2>
-      <p class="case__lede">Conferência de termos de compromisso de equipamentos contra quatro bases internas. São 1.070 termos que eram conferidos à mão e agora saem num relatório em 5 minutos.</p>
-    </header>
-    <div class="case__cols">
-      <section>
-        <h3>O que faz</h3>
-        <ul>
-          <li>Lê os termos em PDF e cruza com as bases de equipamentos e de colaboradores.</li>
-          <li>Aponta cada divergência — série, patrimônio, colaborador — com a correção provável.</li>
-        </ul>
-      </section>
-      <section>
-        <h3>Por baixo</h3>
-        <ul>
-          <li>Comparação aproximada com difflib para achar o registro certo mesmo com erro de digitação.</li>
-          <li>Bases em Excel convertidas para CSV e uma interface simples em Tkinter para quem opera.</li>
-          <li>Nasceu do meu dia a dia com gestão de ativos.</li>
-        </ul>
-      </section>
+  <template id="t-auditsync">
+    <p class="eyebrow">Automação · 2025</p>
+    <h2 class="sheet__title" id="sheetTitle">AuditSync</h2>
+    <p class="sheet__lead">Conferência de termos de compromisso de equipamentos contra quatro bases internas. São 1.070 termos que eram conferidos à mão e agora saem num relatório em 5 minutos.</p>
+    <dl class="report">
+      <div><dt>Status</dt><dd><i class="led"></i>Ferramenta interna</dd></div>
+      <div><dt>Validação</dt><dd>1.070 termos em 5 minutos</dd></div>
+      <div><dt>Bases</dt><dd>4 cruzadas por termo</dd></div>
+    </dl>
+    <div class="spec spec--wide">
+      <p class="spec__head">Conferência · amostra</p>
+      <table>
+        <thead><tr><th>Termo</th><th>Equipamento</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td>0412</td><td>NB-5440 · 7HX2Q</td><td>Confere</td></tr>
+          <tr><td>0413</td><td>NB-5440 · 9KD1M</td><td>Confere</td></tr>
+          <tr class="hot"><td>0414</td><td>MON-24 · 3CQ81</td><td>Base diz 3CQ18 → corrigir?</td></tr>
+          <tr><td>0415</td><td>NB-7420 · 2BW5T</td><td>Confere</td></tr>
+          <tr class="hot"><td>0416</td><td>HEADSET · 00981</td><td>Matrícula sem cadastro ativo</td></tr>
+          <tr><td>0417</td><td>NB-5440 · 6PL0R</td><td>Confere</td></tr>
+        </tbody>
+      </table>
     </div>
-    <footer class="case__foot">
-      <p class="case__stack">Python · Tkinter · difflib · CSV / Excel</p>
-      <p class="case__note">Ferramenta interna: código e dados são privados.</p>
-    </footer>
+    <section class="sheet__sec">
+      <h3 class="h3">O que faz</h3>
+      <ul class="ticks">
+        <li>Lê os termos em PDF e cruza com as bases de equipamentos e de colaboradores.</li>
+        <li>Aponta cada divergência — série, patrimônio, colaborador — com a correção provável.</li>
+      </ul>
+    </section>
+    <section class="sheet__sec">
+      <h3 class="h3">Por dentro</h3>
+      <ul class="ticks">
+        <li>Comparação aproximada com difflib para achar o registro certo mesmo com erro de digitação.</li>
+        <li>Bases em Excel convertidas para CSV e uma interface simples em Tkinter para quem opera.</li>
+        <li>Nasceu do meu dia a dia com gestão de ativos.</li>
+      </ul>
+    </section>
+    <p class="chips"><span>Python</span><span>Tkinter</span><span>difflib</span><span>CSV / Excel</span></p>
+    <p class="note">Ferramenta interna: código e dados são privados.</p>
+  </template>
+
+  <template id="t-workspace">
+    <p class="eyebrow">Produto DumTech · Windows · 2026</p>
+    <h2 class="sheet__title" id="sheetTitle">DUM Workspace</h2>
+    <p class="sheet__lead">Uma camada sobre o Windows que abre no que você estava fazendo: projetos, pastas, recentes, favoritos, busca e limpeza no mesmo lugar.</p>
+    <dl class="report">
+      <div><dt>Status</dt><dd><i class="led"></i>Instalador para Windows</dd></div>
+      <div><dt>Validação</dt><dd>141 testes + autoteste de 17 checagens</dd></div>
+      <div><dt>Stack</dt><dd>Python · PySide6 · SQLite</dd></div>
+    </dl>
+    <section class="sheet__sec">
+      <h3 class="h3">Por dentro</h3>
+      <ul class="ticks">
+        <li>O sistema de arquivos é a fonte da verdade; o banco guarda só a inteligência por cima dele.</li>
+        <li>141 testes automatizados e um autoteste de 17 checagens dentro do próprio executável.</li>
+        <li>Ferramenta própria que mede a maior pausa da interface a cada versão.</li>
+        <li>Instalador para Windows e temas claro e escuro.</li>
+      </ul>
+    </section>
+  </template>
+
+  <template id="t-printagent">
+    <p class="eyebrow">Ferramenta · impressão · 2026</p>
+    <h2 class="sheet__title" id="sheetTitle">PrintAgent</h2>
+    <p class="sheet__lead">Agente para Windows que recebe os pedidos da loja por WebSocket e imprime na térmica da cozinha. É a ponta final do delivery da pizzaria.</p>
+    <dl class="report">
+      <div><dt>Status</dt><dd><i class="led"></i>Em produção com o delivery</dd></div>
+      <div><dt>Validação</dt><dd>Modo simulação, sem impressora</dd></div>
+      <div><dt>Stack</dt><dd>Go · WebSocket · ESC/POS</dd></div>
+    </dl>
+    <section class="sheet__sec">
+      <h3 class="h3">Por dentro</h3>
+      <ul class="ticks">
+        <li>Modo simulação: decodifica os bytes ESC/POS e mostra a nota na tela — dá para testar sem impressora.</li>
+        <li>Exporta a nota simulada em TXT, PDF e PNG.</li>
+        <li>Binário único, sem dependências externas.</li>
+      </ul>
+    </section>
+  </template>
+
+  <template id="t-dtcc">
+    <p class="eyebrow">Sistema interno da DumTech · 2026</p>
+    <h2 class="sheet__title" id="sheetTitle">DTCC</h2>
+    <p class="sheet__lead">O sistema interno da DumTech, sem framework: um micro-kernel próprio (sinais reativos, roteador, cache) e um motor que gera as telas de cadastro a partir de uma definição.</p>
+    <dl class="report">
+      <div><dt>Status</dt><dd><i class="led"></i>Uso interno</dd></div>
+      <div><dt>Validação</dt><dd>Row Level Security, multiempresa</dd></div>
+      <div><dt>Stack</dt><dd>TypeScript · Vite · Supabase</dd></div>
+    </dl>
+    <section class="sheet__sec">
+      <h3 class="h3">Por dentro</h3>
+      <ul class="ticks">
+        <li>Busca, filtros, paginação e validação incluídos em cada tela gerada.</li>
+        <li>Cofre com criptografia no navegador (Argon2id + AES-256-GCM): o servidor nunca vê a senha.</li>
+        <li>Multiempresa desde o primeiro dia, com Row Level Security no Postgres.</li>
+      </ul>
+    </section>
+  </template>
+
+  <template id="t-dtac">
+    <p class="eyebrow">Ferramenta pessoal · 2026</p>
+    <h2 class="sheet__title" id="sheetTitle">DTAC</h2>
+    <p class="sheet__lead">Painel pessoal com monitor de sites, cofre de senhas, vendas, tarefas em Kanban e vencimentos de domínio e hospedagem.</p>
+    <dl class="report">
+      <div><dt>Status</dt><dd><i class="led"></i>Uso diário</dd></div>
+      <div><dt>Validação</dt><dd>Cofre zero-knowledge, RLS por usuário</dd></div>
+      <div><dt>Stack</dt><dd>JavaScript · Supabase</dd></div>
+    </dl>
+    <section class="sheet__sec">
+      <h3 class="h3">Por dentro</h3>
+      <ul class="ticks">
+        <li>Senha-mestra separada do login, PBKDF2 com 210 mil iterações e AES-GCM no navegador.</li>
+        <li>Row Level Security por usuário em todas as tabelas.</li>
+      </ul>
+    </section>
+  </template>
+
+  <template id="t-landing">
+    <p class="eyebrow">Cliente · cosméticos · 2026</p>
+    <h2 class="sheet__title" id="sheetTitle">Landing com editor</h2>
+    <p class="sheet__lead">Página de venda de um produto de skincare com editor por blocos no próprio site: quem cuida da loja troca textos, fotos e links de checkout sem mexer em código.</p>
+    <dl class="report">
+      <div><dt>Status</dt><dd><i class="led"></i>No ar</dd></div>
+      <div><dt>Validação</dt><dd>Rascunho separado da versão publicada</dd></div>
+      <div><dt>Stack</dt><dd>JavaScript · Supabase · Meta Pixel</dd></div>
+    </dl>
+    <section class="sheet__sec">
+      <h3 class="h3">Por dentro</h3>
+      <ul class="ticks">
+        <li>Editor por blocos em vez de arrastar e soltar livre — o site não quebra na mão de quem não é designer.</li>
+        <li>Rascunho e versões publicadas guardados no Supabase.</li>
+        <li>Pixel da Meta configurado para medir campanhas.</li>
+      </ul>
+    </section>
+    <p class="note">Projeto de cliente: a marca fica de fora.</p>
+  </template>
+
+  <template id="t-financesolux">
+    <p class="eyebrow">Produto · finanças · 2025</p>
+    <h2 class="sheet__title" id="sheetTitle">FinanceSolux</h2>
+    <p class="sheet__lead">Controle financeiro com painéis, receitas e despesas, recorrências e relatórios automáticos. Em 2026 ganhou um redesenho completo com foco em velocidade.</p>
+    <dl class="report">
+      <div><dt>Status</dt><dd><i class="led"></i>Redesenhado em 2026</dd></div>
+      <div><dt>Validação</dt><dd>Bancada de testes com Supabase falso</dd></div>
+      <div><dt>Stack</dt><dd>JavaScript · Tailwind · Supabase</dd></div>
+    </dl>
+    <section class="sheet__sec">
+      <h3 class="h3">Por dentro</h3>
+      <ul class="ticks">
+        <li>Salva com confirmação do servidor, sem recarregar a tela.</li>
+        <li>Fontes e bibliotecas servidas pelo próprio site, sem depender de CDN.</li>
+      </ul>
+    </section>
   </template>
 </body>
 </html>
